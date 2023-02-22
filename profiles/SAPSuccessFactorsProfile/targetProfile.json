@@ -1,0 +1,313 @@
+{
+  "name" : "SAPSuccessFactorsProfile",
+  "description" : "SAPSuccessFactorsProfile profile definition",
+  "providerType" : "SDI",
+  "providerConfig" : {
+    "changePassword" : true
+  },
+  "resourceTypes" : [ {
+    "schemas" : [ "urn:ietf:params:scim:schemas:core:2.0:ResourceType" ],
+    "id" : "SAPSuccessFactorsProfileUser",
+    "name" : "User",
+    "endpoint" : "Users",
+    "description" : "SAPSuccessFactorsProfile User",
+    "schema" : "urn:ietf:params:scim:schemas:core:2.0:User",
+    "schemaExtensions" : [ {
+      "schema" : "urn:ibm:idbrokerage:params:scim:schemas:extension:SAPSuccessFactorsAccountProfile:2.0:User",
+      "required" : false
+    } ],
+    "meta" : {
+      "location" : "/v2/ResourceTypes/Users",
+      "resourceType" : "ResourceType"
+    }
+  }, {
+    "schemas" : [ "urn:ietf:params:scim:schemas:core:2.0:ResourceType" ],
+    "id" : "SAPSuccessFactorsProfileGroup",
+    "name" : "Group",
+    "endpoint" : "Groups",
+    "description" : "SAPSuccessFactorsProfile Group",
+    "schema" : "urn:ietf:params:scim:schemas:core:2.0:Group",
+    "schemaExtensions" : [ ],
+    "meta" : {
+      "location" : "/v2/ResourceTypes/Groups",
+      "resourceType" : "ResourceType"
+    }
+  }, {
+    "schemas" : [ "urn:ietf:params:scim:schemas:core:2.0:ResourceType" ],
+    "id" : "SAPSuccessFactorsProfileTarget",
+    "name" : "Target",
+    "endpoint" : "Targets",
+    "description" : "SAPSuccessFactorsProfile Target",
+    "schema" : "urn:ibm:idbrokerage:params:scim:schemas:SAPSuccessFactorsProfile:2.0:Target",
+    "schemaExtensions" : [ ],
+    "meta" : {
+      "location" : "/v2/ResourceTypes/Targets",
+      "resourceType" : "ResourceType"
+    }
+  } ],
+  "userExtension" : {
+    "schema" : "urn:ibm:idbrokerage:params:scim:schemas:extension:SAPSuccessFactorsAccountProfile:2.0:User",
+    "definition" : {
+      "id" : "urn:ibm:idbrokerage:params:scim:schemas:extension:SAPSuccessFactorsAccountProfile:2.0:User",
+      "name" : "CustomUserExtension",
+      "description" : "Security adapter view of a user",
+      "attributes" : [ {
+        "name" : "erUid",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "An identifier used to uniquely identify a user",
+        "required" : false,
+        "mutability" : "immutable",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "server"
+      }, {
+        "name" : "erAccountStatus",
+        "type" : "integer",
+        "multiValued" : false,
+        "description" : "An identifier used to indicate if the account is active(0) or suspended(1).",
+        "required" : false,
+        "mutability" : "readWrite",
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none",
+        "canonicalValues" : [ 0, 1 ]
+      }, {
+        "name" : "eremail",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "AUTO-GENERATED Connector",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erpersonnelnumber",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "AUTO-GENERATED Connector",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erpersonidexternal",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "AUTO-GENERATED Connector",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "eruserid",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "AUTO-GENERATED Connector",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      } ]
+    },
+    "attributeMapping" : {
+      "objectProfile" : "SAPSuccessFactorsAccountProfile",
+      "resourceType" : "User",
+      "commonAttributes" : {
+        "externalId" : "",
+        "meta" : {
+          "created" : "",
+          "lastModified" : ""
+        }
+      },
+      "coreAttributes" : {
+        "userName" : "eruid",
+        "password" : "erpassword",
+        "active" : "eraccountstatus",
+        "name" : {
+          "formatted" : "",
+          "familyName" : "",
+          "givenName" : "",
+          "middleName" : "",
+          "honorificPrefix" : "",
+          "honorificSuffix" : ""
+        },
+        "displayName" : "",
+        "nickName" : "",
+        "profileUrl" : "",
+        "title" : "",
+        "userType" : "",
+        "preferredLanguage" : "",
+        "locale" : "",
+        "timezone" : "",
+        "emails" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "phoneNumbers" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "ims" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "photos" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "addresses" : [ {
+          "formatted" : [ ],
+          "streetAddress" : [ ],
+          "locality" : "",
+          "region" : "",
+          "postalCode" : "",
+          "country" : "",
+          "type" : ""
+        } ],
+        "entitlements" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "roles" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "x509Certificates" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "groups" : [ ]
+      },
+      "enterpriseExtensionAttributes" : {
+        "employeeNumber" : "",
+        "costCenter" : "",
+        "organization" : "",
+        "division" : "",
+        "department" : "",
+        "manager" : {
+          "value" : "",
+          "displayname" : ""
+        }
+      }
+    }
+  },
+  "groupExtensions" : [ ],
+  "targetSchema" : {
+    "schema" : "urn:ibm:idbrokerage:params:scim:schemas:SAPSuccessFactorsProfile:2.0:Target",
+    "definition" : {
+      "name" : "Target definition",
+      "id" : "urn:ibm:idbrokerage:params:scim:schemas:SAPSuccessFactorsProfile:2.0:Target",
+      "description" : "SAPSuccessFactorsProfile Target definition",
+      "attributes" : [ {
+        "name" : "erservicename",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "name for this target",
+        "required" : true,
+        "caseExact" : false,
+        "mutability" : "readWrite",
+        "returned" : "always",
+        "uniqueness" : "none",
+        "specialFlags" : "none"
+      }, {
+        "name" : "eritdiurl",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "URL of SDI dispatcher",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erURL",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "erURL",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erUser",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "",
+        "required" : true,
+        "caseExact" : false,
+        "mutability" : "readWrite",
+        "returned" : "default",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erCompany",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "",
+        "required" : true,
+        "caseExact" : false,
+        "mutability" : "readWrite",
+        "returned" : "default",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erPassword",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "A password used to authenticate a user",
+        "required" : true,
+        "mutability" : "writeOnly",
+        "caseExact" : true,
+        "returned" : "never",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erPrivateKey",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "",
+        "required" : true,
+        "caseExact" : false,
+        "mutability" : "readWrite",
+        "returned" : "default",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erOptionid",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "",
+        "required" : true,
+        "caseExact" : false,
+        "mutability" : "readWrite",
+        "returned" : "default",
+        "uniqueness" : "none"
+      } ]
+    }
+  },
+  "supportingDataAttributeMapping" : [ ]
+}

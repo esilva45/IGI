@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsml>
+  <directory-schema>
+    <attribute-type single-value="true">
+      <name>eruid</name>
+      <description>AUTO-GENERATED Connector</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.159.2.1</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+
+    <attribute-type single-value="true">
+      <name>eraccountstatus</name>
+      <description>AUTO-GENERATED Connector</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.159.2.2</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+
+    <attribute-type single-value="true">
+      <name>eremail</name>
+      <description>AUTO-GENERATED Connector</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.159.2.3</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+
+    <attribute-type single-value="true">
+      <name>erpersonnelnumber</name>
+      <description>AUTO-GENERATED Connector</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.159.2.4</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+
+    <attribute-type single-value="true">
+      <name>erpersonidexternal</name>
+      <description>AUTO-GENERATED Connector</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.159.2.5</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+
+    <attribute-type single-value="true">
+      <name>eruserid</name>
+      <description>AUTO-GENERATED Connector</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.159.2.6</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+
+    <attribute-type single-value="true">
+      <name>erASDisableALCache</name>
+      <description>Disabled the Al Caching for All Al that contain Check Box On</description>
+      <object-identifier>erASDisableALCache-OID</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.56</syntax>
+    </attribute-type>
+    <!-- ******************************************************** -->
+    <!-- erSAPSuccessFactorsService Class        -->
+    <!-- ******************************************************** -->
+    <class superior="top">
+      <name>erSAPSuccessFactorsService</name>
+      <description>Class representing a RMI service provider for Adapter</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.159.1.2</object-identifier>
+      <attribute ref="erITDIurl" required="true"/>
+      <attribute ref="erUrl" required="true"/>
+      <attribute ref="erUser" required="true"/>
+      <attribute ref="erCompany" required="true"/>
+      <attribute ref="erPassword" required="true"/>
+      <attribute ref="erPrivateKey" required="true"/>
+      <attribute ref="erOptionid" required="true"/>
+    </class>
+    <!-- ******************************************************** -->
+    <!-- erASAccount Class         -->
+    <!-- ******************************************************** -->
+    <class superior="top">
+      <name>erSAPSuccessFactorsAccount</name>
+      <description>CustomAccount account</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.159.1.1</object-identifier>
+      <attribute ref="eruid" required="false"/>
+	    <attribute ref="eraccountstatus" required="false"/>
+      <attribute ref="eremail" required="false"/>
+      <attribute ref="erpersonnelnumber" required="false"/>
+      <attribute ref="erpersonidexternal" required="false"/>
+      <attribute ref="eruserid" required="false"/>
+    </class>
+  </directory-schema>
+</dsml>

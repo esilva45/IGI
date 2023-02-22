@@ -1,0 +1,33 @@
+<page>
+	<body>
+		<tabbedForm>
+			<tab index="0" selected="true">
+				<title>$tag.as.User</title>
+				<image/>
+				<url>javascript:switchTabs(document.forms['body'],0);</url>
+				<formElement label="ID" name="data.eruid" required="true">
+					<input name="data.eruid" size="50" type="text"/>
+					<constraint>
+						<type>REQUIRED</type>
+						<parameter>true</parameter>
+					</constraint>
+				</formElement>
+				<formElement label="EMAIL" name="data.eremail">
+					<input name="data.eremail" size="50" type="text"/>
+				</formElement>
+				<formElement label="STATUS" name="data.eraccountstatus">
+					<input name="data.eraccountstatus" size="50" type="text"/>
+				</formElement>
+				<formElement label="MATRICULA" name="data.erpersonnelnumber">
+					<input name="data.erpersonnelnumber" size="50" type="erpersonnelnumber"/>
+				</formElement>
+				<formElement label="USER ID" name="data.eruserid">
+					<input name="data.eruserid" size="50" type="eruserid"/>
+				</formElement>
+				<formElement label="PERSON ID" name="data.erpersonidexternal">
+					<input name="data.erpersonidexternal" size="50" type="erpersonidexternal"/>
+				</formElement>
+			</tab>
+		</tabbedForm>
+	</body>
+</page>

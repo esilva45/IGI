@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dsml>
+<directory-schema>
+
+	<attribute-type single-value = "true" >
+	<name>erhrfeedtargetclient</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.1</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	
+	<attribute-type single-value = "true" >
+	<name>erhrfeedloginid</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.2</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>erservicepwd</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.3</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	
+	<attribute-type single-value = "true" >
+	<name>erhrfeedhostname</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.4</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>erhrfeedsysnr</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.5</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>erhrfeedlanguage</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.6</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>erdays</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.7</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>ercpf</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.8</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>erpernr</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.9</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>eruid</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.10</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>erjdbcurl</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.11</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>erjdbcuser</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.12</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>erjdbcpassword</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.13</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+
+	<attribute-type single-value = "true" >
+	<name>erhrfeedalfilesystempath</name>
+	<description>AL file system Path</description>
+	<object-identifier>1.3.6.1.4.1.6054.3.159.2.14</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+	<!-- ******************************************************** -->
+	<!-- erSapHRAccount class -->
+	<!-- ******************************************************** -->
+	<class superior="top">
+	<name>erHRFeedAccount</name>
+	<description>HRFeed account class</description>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.1.1</object-identifier>
+	<attribute ref="eruid" required="true" />
+	<attribute ref="ercpf" required="true" />
+	<attribute ref="erpernr" required="true" />
+	</class>
+
+	<!-- ******************************************************** -->
+	<!-- erSapHRService class -->
+	<!-- ******************************************************** -->
+	<class superior="top">
+	<name>erHRFeedService</name>
+	<description>class representing a  a RMI service provider for sap.</description>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.1.2</object-identifier>
+    <attribute ref="eritdiurl" required="true" />
+	<attribute ref="erhrfeedtargetclient" required="true" />
+	<attribute ref="erhrfeedloginid" required="true" />
+	<attribute ref="erservicepwd" required="true" />
+	<attribute ref="erhrfeedhostname" required="true" /> 
+	<attribute ref="erhrfeedsysnr" required="true" />
+	<attribute ref="erhrfeedlanguage" required="true" />
+	<attribute ref="erdays" required="true" />
+	<attribute ref="erjdbcurl" required="true" />
+	<attribute ref="erjdbcuser" required="true" />
+	<attribute ref="erjdbcpassword" required="true" />
+	<attribute ref="erhrfeedalfilesystempath" required="false" />
+    </class>
+	
+</directory-schema>
+</dsml>

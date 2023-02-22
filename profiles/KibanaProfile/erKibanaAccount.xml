@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+   <body>
+      <form action="formvalidator0">
+         <formElement direction="inherit" label="$eruid" name="data.eruid">
+            <input name="data.eruid" type="text"/>
+         </formElement>
+         <formElement direction="inherit" label="$erusername" name="data.erusername">
+            <input name="data.erusername" type="text"/>
+         </formElement>
+         <formElement direction="inherit" label="$erfullname" name="data.erfullname">
+            <input name="data.erfullname" type="text"/>
+         </formElement>
+         <formElement direction="inherit" label="$eremail" name="data.eremail">
+            <input name="data.eremail" type="text"/>
+         </formElement>
+         <formElement direction="inherit" label="$errolename" name="data.errolename">
+            <searchFilter multiple="true" type="select">
+               <filter>(objectclass=erKibanaRoles)</filter>
+               <base/>
+               <attribute>erroleid</attribute>
+               <sourceAttribute/>
+               <delimiter/>
+               <size/>
+               <width/>
+               <objectClass>erKibanaRoles</objectClass>
+               <showQueryUI>false</showQueryUI>
+               <paginateResults>false</paginateResults>
+            </searchFilter>
+         </formElement>
+      </form>
+   </body>
+</page>

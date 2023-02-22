@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service erserviceproviderfactory="com.ibm.itim.remoteservices.provider.itdiprovider.ItdiServiceProviderFactory" name="SAPSuccessFactorsProfile" xmlns:svc="urn:com:ibm:itim:service:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:ibm:itim:service:1 service.xsd ">
+	<type category="service" location="schema.dsml" name="erSAPSuccessFactorsService" profile="SAPSuccessFactorsProfile">
+		<key>
+			<field>erservicename</field>
+		</key>
+		<form location="erSAPSuccessFactorsService.xml"/>
+	</type>
+	<type category="account" location="schema.dsml" name="erSAPSuccessFactorsAccount" profile="SAPSuccessFactorsAccountProfile">
+		<key>
+			<field>eruid</field>
+		</key>
+		<form location="erSAPSuccessFactorsAccount.xml"/>
+	</type>
+	<operation cn="TestConnection">
+		<name>test</name>
+		<description>operation recon supported by SearchAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<connector name="iterUser">
+			<parameter name="url" source="erUrl">URL</parameter>
+			<parameter name="user" source="erUser">User name</parameter>
+			<parameter name="company" source="erCompany">Company ID</parameter>
+			<parameter name="password" source="erPassword">Password</parameter>
+			<parameter name="privatekey" source="erPrivateKey">Private Key</parameter>
+			<parameter name="optionid" source="erOptionid">Option ID</parameter>
+			<dispatcherParameter name="poolID">
+				<default>iterUser/$(SO!erUrl)/$(SO!erUser)/$(SO!erCompany)/$(SO!erPassword)/$(SO!erPrivateKey)/$(SO!erOptionid)</default>
+			</dispatcherParameter>
+		</connector>
+		<connector name="SAPSuccessFactorsConnector">
+			<parameter name="url" source="erUrl">URL</parameter>
+			<parameter name="user" source="erUser">User name</parameter>
+			<parameter name="company" source="erCompany">Company ID</parameter>
+			<parameter name="password" source="erPassword">Password</parameter>
+			<parameter name="privatekey" source="erPrivateKey">Private Key</parameter>
+			<parameter name="optionid" source="erOptionid">Option ID</parameter>
+			<dispatcherParameter name="poolID">
+				<default>SAPSuccessFactorsConnector/$(SO!erUrl)/$(SO!erUser)/$(SO!erCompany)/$(SO!erPassword)/$(SO!erPrivateKey)/$(SO!erOptionid)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>TestConnection.xml</assemblyLine>
+	</operation>
+	<!-- ############################ -->
+	<operation cn="AddUser">
+		<name>add</name>
+		<description>add operations are supported by AddAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<connector name="SAPSuccessFactorsConnector">
+			<parameter name="url" source="erUrl">URL</parameter>
+			<parameter name="user" source="erUser">User name</parameter>
+			<parameter name="company" source="erCompany">Company ID</parameter>
+			<parameter name="password" source="erPassword">Password</parameter>
+			<parameter name="privatekey" source="erPrivateKey">Private Key</parameter>
+			<parameter name="optionid" source="erOptionid">Option ID</parameter>
+			<dispatcherParameter name="poolID">
+				<default>SAPSuccessFactorsConnector/$(SO!erUrl)/$(SO!erUser)/$(SO!erCompany)/$(SO!erPassword)/$(SO!erPrivateKey)/$(SO!erOptionid)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>AddUser.xml</assemblyLine>
+	</operation>
+	<!-- ############################ -->
+	<operation cn="SearchUser">
+		<name>search</name>
+		<description>search operations are supported by AddAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<connector name="SAPSuccessFactorsConnector">
+			<parameter name="url" source="erUrl">URL</parameter>
+			<parameter name="user" source="erUser">User name</parameter>
+			<parameter name="company" source="erCompany">Company ID</parameter>
+			<parameter name="password" source="erPassword">Password</parameter>
+			<parameter name="privatekey" source="erPrivateKey">Private Key</parameter>
+			<parameter name="optionid" source="erOptionid">Option ID</parameter>
+			<dispatcherParameter name="poolID">
+				<default>SAPSuccessFactorsConnector/$(SO!erUrl)/$(SO!erUser)/$(SO!erCompany)/$(SO!erPassword)/$(SO!erPrivateKey)/$(SO!erOptionid)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>SearchUser.xml</assemblyLine>
+	</operation>
+	<!-- ############################ -->
+	<operation cn="DeleteUser">
+		<name>delete</name>
+		<description>operation delete supported by DeleteAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<connector name="SAPSuccessFactorsConnector">
+			<parameter name="url" source="erUrl">URL</parameter>
+			<parameter name="user" source="erUser">User name</parameter>
+			<parameter name="company" source="erCompany">Company ID</parameter>
+			<parameter name="password" source="erPassword">Password</parameter>
+			<parameter name="privatekey" source="erPrivateKey">Private Key</parameter>
+			<parameter name="optionid" source="erOptionid">Option ID</parameter>
+			<dispatcherParameter name="poolID">
+				<default>SAPSuccessFactorsConnector/$(SO!erUrl)/$(SO!erUser)/$(SO!erCompany)/$(SO!erPassword)/$(SO!erPrivateKey)/$(SO!erOptionid)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>DeleteUser.xml</assemblyLine>
+	</operation>
+	<!-- ############################ -->
+	<operation cn="ModifyUser">
+		<name>modify</name>
+		<name>suspend</name>
+		<name>restore</name>
+		<name>changePassword</name>
+		<description>operation modify, suspend, restore, change password, validate password, test supported by ModifyAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<connector name="SAPSuccessFactorsConnector">
+			<parameter name="url" source="erUrl">URL</parameter>
+			<parameter name="user" source="erUser">User name</parameter>
+			<parameter name="company" source="erCompany">Company ID</parameter>
+			<parameter name="password" source="erPassword">Password</parameter>
+			<parameter name="privatekey" source="erPrivateKey">Private Key</parameter>
+			<parameter name="optionid" source="erOptionid">Option ID</parameter>
+			<dispatcherParameter name="poolID">
+				<default>SAPSuccessFactorsConnector/$(SO!erUrl)/$(SO!erUser)/$(SO!erCompany)/$(SO!erPassword)/$(SO!erPrivateKey)/$(SO!erOptionid)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>ModifyUser.xml</assemblyLine>
+	</operation>
+	<!-- ############################ -->
+	<properties>
+		<property name="com.ibm.itim.itdi.properties.RMI_URL" source="eritdiurl">
+			<value>rmi://192.168.0.1:1099/ITDIDispatcher</value>
+		</property>
+		<property name="AdapterCategory">
+			<value>Application</value>
+		</property>
+	</properties>
+	<AttributeMap>
+		<Attribute name="erLastAccessDate" profile="account" value="none"/>
+	</AttributeMap>
+</Service>

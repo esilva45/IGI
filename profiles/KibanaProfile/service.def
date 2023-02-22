@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service erserviceproviderfactory="com.ibm.itim.remoteservices.provider.itdiprovider.ItdiServiceProviderFactory" name="KibanaProfile">
+   <type category="service" location="schema.dsml" name="erKibanaService" profile="KibanaProfile">
+      <key>
+         <field>erservicename</field>
+      </key>
+      <form location="erKibanaService.xml"/>
+   </type>
+   <type category="account" location="schema.dsml" name="erKibanaAccount" profile="KibanaAccount">
+      <key>
+         <field>eruid</field>
+      </key>
+      <form location="erKibanaAccount.xml"/>
+   </type>
+   <operation cn="KibanaAddAccount">
+      <name>add</name>
+      <description>add operations are supported by AddAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="KibanaConnector">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <dispatcherParameter name="poolID">
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>KibanaAddAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="KibanaDeleteAccount">
+      <name>delete</name>
+      <description>operation delete supported by DeleteAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="delete">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <dispatcherParameter name="poolID">
+            <default>delete/$(SO!erurl)/$(SO!ertoken)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+         </dispatcherParameter>
+      </connector>
+      <connector name="lookup">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <dispatcherParameter name="poolID">
+            <default>lookup/$(SO!erurl)/$(SO!ertoken)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>KibanaDeleteAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="KibanaModifyAccount">
+      <name>modify</name>
+      <description>operation modify supported by ModifyAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="KibanaConnector">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <dispatcherParameter name="poolID">
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>KibanaModifyAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="KibanaSuspendAccount">
+      <name>suspend</name>
+      <description>operation suspend supported by ModifyAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="KibanaConnector">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <dispatcherParameter name="poolID">
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>KibanaSuspendAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="KibanaRestoreAccount">
+      <name>restore</name>
+      <description>operation restore supported by ModifyAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="KibanaConnector">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <dispatcherParameter name="poolID">
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>KibanaRestoreAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="KibanaChangePassword">
+      <name>changePassword</name>
+      <description>operation change password supported by ModifyAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="KibanaConnector">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <dispatcherParameter name="poolID">
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>KibanaChangePassword.xml</assemblyLine>
+   </operation>
+   <operation cn="KibanaSearch">
+      <name>search</name>
+      <name>searchData</name>
+      <description>search operations are supported by AddAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="searchRoles">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <dispatcherParameter name="poolID">
+            <default>searchRoles/$(SO!erurl)/$(SO!ertoken)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+         </dispatcherParameter>
+      </connector>
+      <connector name="searchUser">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <dispatcherParameter name="poolID">
+            <default>searchUser/$(SO!erurl)/$(SO!ertoken)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>KibanaSearch.xml</assemblyLine>
+   </operation>
+   <operation cn="KibanaTestConnection">
+      <name>test</name>
+      <description/>
+      <input name="eruid" source="eruid"/>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>KibanaTestConnection.xml</assemblyLine>
+   </operation>
+   <properties>
+      <property name="AdapterCategory">
+         <value>Application</value>
+      </property>
+      <property name="ProfileVersion">
+         <value>1.0</value>
+      </property>
+      <property name="com.ibm.itim.remoteservices.ResourceProperties.PASSWORD_NOT_REQUIRED_ON_RESTORE">
+         <value>false</value>
+      </property>
+      <property name="com.ibm.itim.itdi.properties.RMI_URL" source="erITDIURL">
+         <value>rmi://localhost:1099/ITDIDispatcher</value>
+      </property>
+      <property name="Indexed">
+         <value>erroleid,errolename</value>
+      </property>
+   </properties>
+   <AttributeMap>
+      <Attribute name="erLastAccessDate" profile="account" value="none"/>
+   </AttributeMap>
+   <ServiceGroups>
+      <GroupDefinition accountAttribute="erRole" className="erKibanaRoles" profileName="KibanaRole" rdnAttribute="erroleid">
+         <AttributeMap>
+            <Attribute name="erroleid" value="erroleid"/>
+            <Attribute name="errolename" value="errolename"/>
+         </AttributeMap>
+         <properties>
+            <property name="ExternalType">
+               <value>KibanaRoles</value>
+            </property>
+            <property name="Managed">
+               <value>true</value>
+            </property>
+         </properties>
+         <form location="erKibanaRoles.xml"/>
+      </GroupDefinition>
+   </ServiceGroups>
+</Service>

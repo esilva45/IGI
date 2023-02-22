@@ -1,0 +1,21 @@
+<page>
+	<body>
+		<tabbedForm>
+			<tab index="0" selected="true">
+				<title><![CDATA[$HRFeedProfile]]></title>
+				<image/>
+				<url>javascript:switchTabs(document.forms['body'],0);</url>
+				<formElement direction="inherit" required="true" label="$eruid" name="data.eruid">
+					<input type="text" name="data.eruid"/>
+					<constraint><type>required</type><parameter>true</parameter></constraint>
+				</formElement>
+				<formElement name="data.erpernr" label="$erpernr">
+					<input name="data.erpernr" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.erpernr" label="$erpernr">
+					<input name="data.erpernr" size="50" type="text"/>
+				</formElement>
+			</tab>
+		</tabbedForm>
+	</body>
+</page>

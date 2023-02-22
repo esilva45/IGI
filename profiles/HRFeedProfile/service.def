@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service erserviceproviderfactory="com.ibm.itim.remoteservices.provider.itdiprovider.ItdiServiceProviderFactory" name="HRFeedProfile" xmlns:svc="urn:com:ibm:itim:service:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:ibm:itim:service:1 service.xsd ">
+	<type category="service" location="schema.dsml" name="erHRFeedService" profile="HRFeedProfile">
+		<key>
+			<field>erservicename</field>
+		</key>
+		<form location="erHRFeedService.xml"/>
+	</type>
+	<type category="account" location="schema.dsml" name="erHRFeedAccount" profile="HRFeedAccount">
+		<key>
+			<field>eruid</field>
+		</key>
+		<form location="erHRFeedAccount.xml"/>
+	</type>
+	<operation cn="TestConnection">
+		<name>test</name>
+		<description>Test operation is supported by this AL</description>
+		<input name="eruid" source="eruid"/>
+		<connector name="HRFeedConnector">
+			<parameter name="client" source="erhrfeedtargetclient">Client</parameter>
+			<parameter name="user" source="erhrfeedloginid">User</parameter>
+			<parameter name="passwd" source="erservicepwd">Password</parameter>
+			<parameter name="ashost" source="erhrfeedhostname">Host</parameter>
+			<parameter name="sysnr" source="erhrfeedsysnr">System number</parameter>
+			<parameter name="lang" source="erhrfeedlanguage">Language</parameter>
+			<parameter name="days" source="erdays">Days</parameter>
+			<parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+			<parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+			<parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+			<dispatcherParameter name="poolID">
+				<default>HRFeedConnector/$(SO!erhrfeedtargetclient)/$(SO!erhrfeedloginid)/$(SO!erservicepwd)/$(SO!erhrfeedhostname)/$(SO!erhrfeedsysnr)/$(SO!erhrfeedlanguage)/$(SO!erdays)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="ALFileSystemPath" source="erHRFeedAlFilesystemPath"/>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>TestConnection.xml</assemblyLine>
+	</operation>
+	<operation cn="SearchUser">
+		<name>search</name>
+		<description>Search operation is supported with this AL</description>
+		<input name="eruid" source="eruid"/>
+		<connector name="HRFeedConnector">
+			<parameter name="client" source="erhrfeedtargetclient">Client</parameter>
+			<parameter name="user" source="erhrfeedloginid">User</parameter>
+			<parameter name="passwd" source="erservicepwd">Password</parameter>
+			<parameter name="ashost" source="erhrfeedhostname">Host</parameter>
+			<parameter name="sysnr" source="erhrfeedsysnr">System number</parameter>
+			<parameter name="lang" source="erhrfeedlanguage">Language</parameter>
+			<parameter name="days" source="erdays">Days</parameter>
+			<parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+			<parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+			<parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+			<dispatcherParameter name="poolID">
+				<default>HRFeedConnector/$(SO!erhrfeedtargetclient)/$(SO!erhrfeedloginid)/$(SO!erservicepwd)/$(SO!erhrfeedhostname)/$(SO!erhrfeedsysnr)/$(SO!erhrfeedlanguage)/$(SO!erdays)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="ALFileSystemPath" source="erHRFeedAlFilesystemPath"/>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>SearchUser.xml</assemblyLine>
+	</operation>
+	<properties>
+		<property name="com.ibm.itim.itdi.properties.RMI_URL" source="erITDIURL">
+			<value>rmi://localhost:1099</value>
+		</property>
+		<property name="AdapterCategory">
+			<value>System</value>
+		</property>
+		<property name="ProfileVersion">
+         	<value>1.0</value>
+      	</property>
+		<property name="HR_Target">
+			<value>true</value>
+		</property>
+	</properties>
+	<AttributeMap>
+		<Attribute name="erLastAccessDate" profile="account" value="none"/>
+	</AttributeMap>
+</Service>

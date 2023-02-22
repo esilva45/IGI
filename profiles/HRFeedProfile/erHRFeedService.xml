@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+   <body>
+      <tabbedForm>
+         <tab index="0" selected="true">
+            <title><![CDATA[$HRFeedProfileDesc]]></title>
+            <formElement direction="inherit" label="$erservicename" name="data.erservicename">
+               <input name="data.erservicename" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$eritdiurl" name="data.eritdiurl" required="true">
+               <input name="data.eritdiurl" type="text" value="rmi://192.168.124.152:1099/ITDIDispatcher"/>
+            </formElement>
+            <formElement direction="inherit" name="data.erhrfeedalfilesystempath" label="$erhrfeedalfilesystempath">
+               <input name="data.erhrfeedalfilesystempath" type="text" size="50"/>
+            </formElement>
+         </tab>
+         <tab index="1" selected="false">
+            <title><![CDATA[$SAPConnection]]></title>
+            <formElement direction="inherit" label="$erhrfeedtargetclient" name="data.erhrfeedtargetclient" required="true">
+               <input name="data.erhrfeedtargetclient" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erhrfeedloginid" name="data.erhrfeedloginid" required="true">
+               <input name="data.erhrfeedloginid" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erservicepwd" name="data.erservicepwd" required="true">
+               <input name="data.erservicepwd" type="password"/>
+            </formElement>
+            <formElement direction="inherit" label="$erhrfeedhostname" name="data.erhrfeedhostname" required="true">
+               <input name="data.erhrfeedhostname" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erhrfeedsysnr" name="data.erhrfeedsysnr">
+               <input name="data.erhrfeedsysnr" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erhrfeedlanguage" name="data.erhrfeedlanguage">
+               <input name="data.erhrfeedlanguage" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erdays" name="data.erdays">
+               <input name="data.erdays" type="text"/>
+            </formElement>
+         </tab>
+         <tab index="2" selected="false">
+            <title><![CDATA[$DBConnection]]></title>
+            <formElement direction="inherit" label="$erjdbcurl" name="data.erjdbcurl" required="true">
+               <input name="data.erjdbcurl" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erjdbcuser" name="data.erjdbcuser" required="true">
+               <input name="data.erjdbcuser" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erjdbcpassword" name="data.erjdbcpassword" required="true">
+               <input name="data.erjdbcpassword" type="password"/>
+            </formElement>
+         </tab>
+      </tabbedForm>
+   </body>
+</page>

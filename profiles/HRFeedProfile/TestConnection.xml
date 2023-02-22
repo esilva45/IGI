@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig IDIversion="Created by SDI7.2 - 2022-02-21" created="Mon Jan 16 22:18:43 BRT 2023" createdBy="esilva" modified="Mon Jan 16 22:18:56 BRT 2023" modifiedBy="esilva" version="7.1.1">
+    <Folder name="AssemblyLines">
+        <AssemblyLine name="TestConnection">
+            <ModTime>1673917915808</ModTime>
+            <Settings/>
+            <Hooks>
+                <Hook name="prolog0">
+                    <InheritFrom>[no inheritance]</InheritFrom>
+                    <Name>prolog0</Name>
+                    <Script><![CDATA[// Import ITDI packages
+importPackage(Packages.com.ibm.di);
+importPackage(Packages.com.ibm.di.entry);
+importPackage(Packages.com.ibm.di.dispatcher);
+importPackage(Packages.com.ibm.di.connector);
+
+var adapterVersion = "1.0";
+task.logmsg("INFO","HRFeed Adapter Version " + adapterVersion);
+
+// ITIM Account Objectclass
+var gITIMAccountObjectclass = "erHRFeedAccount";
+
+// Get AL config object.
+var gALCfg = task.getConfigClone();
+
+// Get AL settings object from AL config.
+var gALSettings = gALCfg.getSettings();
+
+// Get Parameters from TCB
+var gOperationType = gALSettings.getStringParameter("OperationType");]]></Script>
+                    <Enabled>true</Enabled>
+                </Hook>
+            </Hooks>
+            <CheckpointConfig/>
+            <SandboxConfig/>
+            <SimulationConfig>
+                <SimulationStates>
+                    <Component name="TestSapConnection" state="Simulated"/>
+                </SimulationStates>
+                <ProxySettings/>
+            </SimulationConfig>
+            <LogConfig/>
+            <ContainerEF name="EntryFeedContainer"/>
+            <ContainerDF name="DataFlowContainer">
+                <Script name="TestConnection">
+                    <ModTime>1673917915808</ModTime>
+                    <parameter name="script"><![CDATA[work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
+    Packages.com.ibm.itim.remoteservices.provider.Status.SUCCESSFUL));]]></parameter>
+                </Script>
+            </ContainerDF>
+            <ThreadOptions/>
+            <Operations/>
+            <InitParams>
+                <Schema name="AssemblyLineInitParams"/>
+            </InitParams>
+        </AssemblyLine>
+    </Folder>
+    <Folder name="Connectors"/>
+    <Folder name="Parsers"/>
+    <Folder name="Scripts">
+        <Script name="Adapter Global Script">
+            <ModTime>1672871668536</ModTime>
+            <parameter name="autoInclude">true</parameter>
+            <parameter name="includeFiles"/>
+            <parameter name="script"><![CDATA[function initStatusCode() {
+    // Init status code to successful
+    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
+        Packages.com.ibm.itim.remoteservices.provider.Status.SUCCESSFUL));
+}
+
+function setStatusUnSuccessful() {
+    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
+        Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+}
+
+function processError() {
+    work.removeAllAttributes();
+
+    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, 
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+
+    if( error.getString("class") == "javax.naming.CommunicationException") {
+        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
+            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.COMMUNICATION_ERROR));
+        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE, 
+            Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.CONNECTOR_CONNECTION_ERROR);
+    } else if( error.getString("class") == "javax.naming.AuthenticationException") {
+        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
+            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.AUTHENTICATION_ERROR));
+        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE, 
+            Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_INVALID_LOGIN_CREDENTIALS);
+    } else if(error.getString("class") == "javax.naming.NameNotFoundException") {
+        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
+            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.NAME_NOT_FOUND_ERROR));
+        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,getErrorReasonMessage());
+    } else {
+        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
+            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.PROCESSING_ERROR));
+        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,getErrorReasonMessage());
+    }
+
+    var v = new Packages.java.util.Vector();
+    v.add(gOperationType + " Error: " + error.toString());
+    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE_ARGS, v);
+
+    var e = new Packages.com.ibm.di.exception.ITDIAgentException(gOperationType + " Error");
+    e.setEntry(work);
+    task.logmsg("DEBUG", "Process Error: Throwing ITDI Exception");
+    system.dumpEntry(work);
+    throw e;
+}
+
+function getErrorReasonMessage() {
+    var rmsg = "";
+    if (gOperationType == "add") 
+        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_ADD_FAILED;
+    else if (gOperationType == "modify") 
+        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_MOD_FAILED;
+    else if (gOperationType == "delete") 
+        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_DEL_FAILED;
+    else if (gOperationType == "suspend") 
+       rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_SUSPEND_FAILED;
+    else if (gOperationType == "restore") 
+        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_RESTORE_FAILED;
+    else if (gOperationType == "changepassword") 
+        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_MOD_FAILED;
+    else if (gOperationType == "search") 
+        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_SRCH_FAILED;
+    else task.logmsg("DEBUG", "getErrorReasonMessage: Invalid operation type " + gOperationType);
+
+    task.logmsg("DEBUG","getErrorReasonMessage: ReasonMessage: " + rmsg);
+    return rmsg;
+}]]></parameter>
+        </Script>
+    </Folder>
+    <JavaLibraries/>
+    <JavaProperties/>
+    <Folder name="Includes"/>
+    <Folder name="Config">
+        <LogConfig name="Logging"/>
+        <InstanceProperties name="AutoStart">
+            <AutoStart/>
+        </InstanceProperties>
+        <TombstonesConfig name="Tombstones"/>
+        <SolutionInterface name="SolutionInterface"/>
+    </Folder>
+    <Folder name="Functions"/>
+    <Folder name="AttributeMaps"/>
+    <Properties>
+        <Stores>
+            <PropertyStore name="system">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/HRFeedProfile/Resources/system.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>1000</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="java">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/HRFeedProfile/Resources/java.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>1000</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="solution">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/HRFeedProfile/Resources/solution.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>1000</CacheTimeout>
+            </PropertyStore>
+        </Stores>
+    </Properties>
+    <Folder name="Schedules"/>
+    <Folder name="Sequences"/>
+    <Container name="Package">
+        <ModTime>1673918334417</ModTime>
+        <Container name="Resources"/>
+        <Container name="Operations"/>
+        <ParameterList name="Info">
+            <parameter name="author">Elso A Silva</parameter>
+            <parameter name="date">2023-01-16</parameter>
+            <parameter name="packageid">TestConnection</parameter>
+            <parameter name="version">1.0</parameter>
+        </ParameterList>
+    </Container>
+</MetamergeConfig>

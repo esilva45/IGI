@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsml>
+   <directory-schema>
+      <attribute-type single-value="false">
+         <name>erroleid</name>
+         <object-identifier>erroleid-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.1</syntax>
+      </attribute-type>
+      <attribute-type single-value="false">
+         <name>errolename</name>
+         <object-identifier>errolename-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.2</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erurl</name>
+         <object-identifier>erurl-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.3</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ertoken</name>
+         <object-identifier>ertoken-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.4</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erjdbcurl</name>
+         <object-identifier>erjdbcurl-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.5</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erjdbcuser</name>
+         <object-identifier>erjdbcuser-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.6</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erjdbcpassword</name>
+         <object-identifier>erjdbcpassword-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.7</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erusername</name>
+         <object-identifier>erusername-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.8</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erpassword</name>
+         <object-identifier>erpassword-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.9</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erfullname</name>
+         <object-identifier>erfullname-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.10</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>eremail</name>
+         <object-identifier>eremail-OID</object-identifier>
+         <syntax>1.3.6.1.4.1.6054.3.159.2.11</syntax>
+      </attribute-type>
+      <!--******************************************-->
+      <!--******  Objectclass definitions ******-->
+      <!--******       erKibanaAccount    ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erKibanaAccount</name>
+         <description>Class representing an Kibana Account</description>
+         <object-identifier>erKibanaAccount-OID</object-identifier>
+         <attribute ref="eruid" required="true"/>
+         <attribute ref="eraccountstatus" required="false"/>
+         <attribute ref="erusername" required="false"/>
+         <attribute ref="erpassword" required="false"/>
+         <attribute ref="erfullname" required="false"/>
+         <attribute ref="eremail" required="false"/>
+      </class>
+      <!--******************************************-->
+      <!--****** erKibanaService ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erKibanaService</name>
+         <description>Class representing an Kibana service</description>
+         <object-identifier>erKibanaService-OID</object-identifier>
+         <attribute ref="erservicename" required="true"/>
+         <attribute ref="eritdiurl" required="true"/>
+         <attribute ref="erurl" required="true"/>
+         <attribute ref="ertoken" required="true"/>
+         <attribute ref="erjdbcurl" required="true"/>
+         <attribute ref="erjdbcuser" required="true"/>
+         <attribute ref="erjdbcpassword" required="true"/>
+      </class>
+      <!--******************************************-->
+      <!--****** erKibanaRoles ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erKibanaRoles</name>
+         <description>Supporting data class</description>
+         <object-identifier>erKibanaRoles-OID</object-identifier>
+         <attribute ref="erroleid" required="false"/>
+         <attribute ref="errolename" required="false"/>
+      </class>
+   </directory-schema>
+</dsml>

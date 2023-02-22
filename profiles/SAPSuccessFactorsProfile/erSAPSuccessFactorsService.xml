@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+   <body>
+      <tabbedForm>
+         <tab index="0" selected="true">
+            <title><![CDATA[$SAPSuccessFactorsProfile]]></title>
+            <formElement direction="inherit" label="$erservicename" name="data.erservicename">
+               <input name="data.erservicename" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$eritdiurl" name="data.eritdiurl" required="true">
+               <input name="data.eritdiurl" type="text" value="rmi://192.168.124.152:1099/ITDIDispatcher"/>
+            </formElement>
+            <formElement direction="inherit" label="$erUrl" name="data.erUrl" required="true">
+               <input name="data.erUrl" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erUser" name="data.erUser" required="true">
+               <input name="data.erUser" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erCompany" name="data.erCompany" required="true">
+               <input name="data.erCompany" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erPrivateKey" name="data.erPrivateKey" required="true">
+               <input name="data.erPrivateKey" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erOptionid" name="data.erOptionid" required="true">
+               <input name="data.erOptionid" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erPassword" name="data.erPassword" required="true">
+               <input name="data.erPassword" type="password"/>
+            </formElement>
+         </tab>    
+      </tabbedForm>
+   </body>
+</page>
