@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsml>
+   <directory-schema>
+      <attribute-type single-value="false">
+         <name>erGroupId</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.2.1</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erGroupName</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.2.2</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erurl</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.2.3</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ertoken</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.2.4</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erusername</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.2.5</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erpassword</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.2.6</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erfullname</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.2.7</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>eremail</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.2.8</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erprimarygroup</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.2.9</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <!--******************************************-->
+      <!--******  Objectclass definitions ******-->
+      <!--******       erKibanaAccount    ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erKibanaAccount</name>
+         <description>Class representing an Kibana Account</description>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.1.1</object-identifier>
+         <attribute ref="eruid" required="true"/>
+         <attribute ref="eraccountstatus" required="false"/>
+         <attribute ref="erusername" required="false"/>
+         <attribute ref="erpassword" required="false"/>
+         <attribute ref="erfullname" required="false"/>
+         <attribute ref="eremail" required="false"/>
+         <attribute ref="erprimarygroup" required="false"/>
+         <attribute ref="ergroupid" required="false"/>
+      </class>
+      <!--******************************************-->
+      <!--****** erKibanaService ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erKibanaService</name>
+         <description>Class representing an Kibana service</description>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.1.2</object-identifier>
+         <attribute ref="erservicename" required="true"/>
+         <attribute ref="eritdiurl" required="true"/>
+         <attribute ref="erurl" required="true"/>
+         <attribute ref="ertoken" required="true"/>
+      </class>
+      <!--******************************************-->
+      <!--****** erKibanaRoles ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erKibanaGroups</name>
+         <description>Supporting data class</description>
+         <object-identifier>1.3.6.1.4.1.6054.3.1159.1.3</object-identifier>
+         <attribute ref="erGroupId" required="true"/>
+         <attribute ref="erGroupName" required="false"/>
+      </class>
+   </directory-schema>
+</dsml>

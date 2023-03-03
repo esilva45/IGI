@@ -1,0 +1,20 @@
+<page>
+	<body>
+		<form action="formvalidator0">
+			<formElement direction="inherit" isReadOnlyOnModify="true" label="$ergroupid" name="data.erGroupId" required="true">
+				<input name="data.erGroupId" size="50" type="text"/>
+				<constraint>
+					<type>REQUIRED</type>
+					<parameter>true</parameter>
+				</constraint>
+			</formElement>
+			<formElement direction="inherit" isReadOnlyOnModify="true" label="$ergroupname" name="data.erGroupName" required="true">
+				<input name="data.erGroupName" size="50" type="text"/>
+				<constraint>
+					<type>REQUIRED</type>
+					<parameter>true</parameter>
+				</constraint>
+			</formElement>
+		</form>
+	</body>
+</page>
