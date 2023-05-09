@@ -1,0 +1,51 @@
+<page>
+	<body>
+		<tabbedForm>
+			<tab index="0" selected="true">
+				<title><![CDATA[$GTProfile]]></title>
+				<image/>
+				<url>javascript:switchTabs(document.forms['body'],0);</url>
+				<formElement direction="inherit" required="true" label="$eruid" name="data.eruid">
+					<input type="text" name="data.eruid"/>
+					<constraint><type>required</type><parameter>true</parameter></constraint>
+				</formElement>
+				<formElement name="data.erstatus" label="$erstatus">
+					<input name="data.erstatus" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.ername" label="$ername">
+					<input name="data.ername" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.erbirthDate" label="$erbirthDate">
+					<input name="data.erbirthDate" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.erpassport" label="$erpassport">
+					<input name="data.erpassport" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.ermailcolaborador" label="$ermailcolaborador">
+					<input name="data.ermailcolaborador" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.ercellPhone" label="$ercellPhone">
+					<input name="data.ercellPhone" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.ermanangerEmail" label="$ermanangerEmail">
+					<input name="data.ermanangerEmail" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.ercnpj" label="$ercnpj">
+					<input name="data.ercnpj" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.ercompanyName" label="$ercompanyName">
+					<input name="data.ercompanyName" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.erdataFimContrato" label="$erdataFimContrato">
+					<input name="data.erdataFimContrato" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.ercpf" label="$ercpf">
+					<input name="data.ercpf" size="50" type="text"/>
+				</formElement>
+				<formElement name="data.ercentroLucro" label="$ercentroLucro">
+					<input name="data.ercentroLucro" size="50" type="text"/>
+				</formElement>
+			</tab>
+		</tabbedForm>
+	</body>
+</page>

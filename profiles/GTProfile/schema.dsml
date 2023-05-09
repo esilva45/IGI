@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dsml>
+<directory-schema>
+	<attribute-type single-value="true">
+	<name>erstatus</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.1</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>ername</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.2</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>erbirthDate</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.3</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>erpassport</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.4</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>ermailcolaborador</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.5</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>ercellPhone</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.6</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>ermanangerEmail</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.7</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>ercnpj</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.8</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>ercompanyName</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.9</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>erdataFimContrato</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.10</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>ercpf</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.11</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>eruser</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.12</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>erpassword</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.2.13</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value="true">
+	<name>erurl</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.159.2.14</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+	<name>eruid</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.159.2.15</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+	<name>ercentroLucro</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.159.2.16</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value = "true" >
+	<name>erjdbcurl</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.159.2.17</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value = "true" >
+	<name>erjdbcuser</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.159.2.18</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<attribute-type single-value = "true" >
+	<name>erjdbcpassword</name>
+	<object-identifier>1.3.6.1.4.1.6054.3.159.2.19</object-identifier>
+	<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+	</attribute-type>
+	<!-- ******************************************************** -->
+	<!-- erSapHRAccount class -->
+	<!-- ******************************************************** -->
+	<class superior="top">
+	<name>erGTAccount</name>
+	<description>GT account class</description>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.1.1</object-identifier>
+	<attribute ref="eruid" required="true" />
+	<attribute ref="ercpf" required="false" />
+	<attribute ref="erstatus" required="false" />
+	<attribute ref="ername" required="false" />
+	<attribute ref="erbirthDate" required="false" />
+	<attribute ref="erpassport" required="false" />
+	<attribute ref="ermailcolaborador" required="false" />
+	<attribute ref="ercellPhone" required="false" />
+	<attribute ref="ermanangerEmail" required="false" />
+	<attribute ref="ercnpj" required="false" />
+	<attribute ref="ercompanyName" required="false" />
+	<attribute ref="erdataFimContrato" required="false" />
+	<attribute ref="ercentroLucro" required="false" />
+	</class>
+
+	<!-- ******************************************************** -->
+	<!-- erSapHRService class -->
+	<!-- ******************************************************** -->
+	<class superior="top">
+	<name>erGTService</name>
+	<description>class representing a  a RMI service provider</description>
+	<object-identifier>1.3.6.1.4.1.6054.3.181.1.2</object-identifier>
+    <attribute ref="eritdiurl" required="true" />
+	<attribute ref="erurl" required="true" />
+	<attribute ref="eruser" required="true" />
+	<attribute ref="erpassword" required="true" />
+	<attribute ref="erjdbcurl" required="true" />
+	<attribute ref="erjdbcuser" required="true" />
+	<attribute ref="erjdbcpassword" required="true" />
+    </class>
+	
+</directory-schema>
+</dsml>
