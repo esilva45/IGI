@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig IDIversion="Created by SDI7.2 - 2022-02-21" created="Mon Feb 20 21:43:43 BRT 2023" createdBy="esilva" modified="Mon Feb 20 21:43:45 BRT 2023" modifiedBy="esilva" version="7.1.1">
+<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig IDIversion="Created by SDI7.2 - 2022-02-21" created="Thu Mar 23 18:58:40 BRT 2023" createdBy="esilva" modified="Thu Mar 23 18:58:52 BRT 2023" modifiedBy="esilva" version="7.1.1">
     <Folder name="AssemblyLines">
         <AssemblyLine name="KibanaRestoreAccount">
-            <ModTime>1676936661194</ModTime>
+            <ModTime>1679608125295</ModTime>
             <Settings/>
             <Hooks>
                 <Hook name="prolog0">
@@ -43,15 +43,16 @@ var gOperationType = gALSettings.getStringParameter("OperationType");]]></Script
             <ContainerDF name="DataFlowContainer">
                 <Connector name="KibanaConnector">
                     <InheritFrom>system:/Connectors/KibanaConnector</InheritFrom>
-                    <ModTime>1676936661194</ModTime>
+                    <ModTime>1679608125295</ModTime>
                     <ConnectorMode>Update</ConnectorMode>
                     <ConnectorState>Enabled</ConnectorState>
                     <Configuration>
                         <InheritFrom>[parent]</InheritFrom>
                         <parameter name="method">PUT</parameter>
+                        <parameter name="operation">Restore</parameter>
                         <parameter encrypted="true" name="token"/>
                         <parameter name="type">User</parameter>
-                        <parameter name="operation">Restore</parameter>
+                        <parameter name="primary_group"/>
                         <parameter name="url"/>
                     </Configuration>
                     <Parser>
@@ -79,7 +80,7 @@ var gOperationType = gALSettings.getStringParameter("OperationType");]]></Script
                         <InheritFrom>[parent]</InheritFrom>
                         <LinkCriteriaItem>
                             <Key>1867135ba2c</Key>
-                            <Attribute>$erusername</Attribute>
+                            <Attribute>$eruid</Attribute>
                             <Operator>equals</Operator>
                             <Value>$eruid</Value>
                         </LinkCriteriaItem>
@@ -89,7 +90,41 @@ var gOperationType = gALSettings.getStringParameter("OperationType");]]></Script
                         <Hook name="default_fail">
                             <InheritFrom>[no inheritance]</InheritFrom>
                             <Name>default_fail</Name>
-                            <Script>processError();</Script>
+                            <Script><![CDATA[var work = system.newEntry();
+var ex = error.getObject("message");
+var errorStr = "Restore Error: " + error.toString();
+
+if( error.getString("class") == "br.com.asyg.connector.exceptions.ConnectorException") {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.COMMUNICATION_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+} else if(work.getProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE) == Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL
+        && error.getString("class") == "com.ibm.di.exception.ITDIAgentException") {
+    throw error.getObject("exception");
+} else {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.PROCESSING_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+}
+
+var e = new Packages.com.ibm.di.exception.ITDIAgentException(errorStr);
+e.setEntry(work);
+task.dumpEntry(work);
+throw e;]]></Script>
                             <Enabled>true</Enabled>
                         </Hook>
                         <Hook name="default_ok">
@@ -122,90 +157,7 @@ var gOperationType = gALSettings.getStringParameter("OperationType");]]></Script
     </Folder>
     <Folder name="Connectors"/>
     <Folder name="Parsers"/>
-    <Folder name="Scripts">
-        <Script name="Adapter Global Script">
-            <ModTime>1667948233865</ModTime>
-            <parameter name="autoInclude">true</parameter>
-            <parameter name="includeFiles"/>
-            <parameter name="script"><![CDATA[function initStatusCode() {
-    // Init status code to successful
-    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
-        Packages.com.ibm.itim.remoteservices.provider.Status.SUCCESSFUL));
-}
-
-function setStatusUnSuccessful() {
-    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
-        Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
-}
-
-function processError() {
-    work.removeAllAttributes();
-
-    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, 
-        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
-
-    if( error.getString("class") == "javax.naming.CommunicationException")
-    {
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
-            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.COMMUNICATION_ERROR));
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE, 
-            Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.CONNECTOR_CONNECTION_ERROR);
-
-    }
-    else if( error.getString("class") == "javax.naming.AuthenticationException")
-    {
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
-            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.AUTHENTICATION_ERROR));
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE, 
-            Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_INVALID_LOGIN_CREDENTIALS);
-    }
-    else if(error.getString("class") == "javax.naming.NameNotFoundException")
-    {
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
-            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.NAME_NOT_FOUND_ERROR));
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,getErrorReasonMessage());
-    }
-    else
-    {
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
-            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.PROCESSING_ERROR));
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,getErrorReasonMessage());
-    }
-
-    var v = new Packages.java.util.Vector();
-    v.add(gOperationType + " Error: " + error.toString());
-    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE_ARGS, v);
-
-    var e = new Packages.com.ibm.di.exception.ITDIAgentException(gOperationType + " Error");
-    e.setEntry(work);
-    task.logmsg("DEBUG", "Process Error: Throwing ITDI Exception");
-    system.dumpEntry(work);
-    throw e;
-}
-
-function getErrorReasonMessage() {
-    var rmsg = "";
-    if (gOperationType == "add") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_ADD_FAILED;
-    else if (gOperationType == "modify") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_MOD_FAILED;
-    else if (gOperationType == "delete") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_DEL_FAILED;
-    else if (gOperationType == "suspend") 
-       rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_SUSPEND_FAILED;
-    else if (gOperationType == "restore") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_RESTORE_FAILED;
-    else if (gOperationType == "changepassword") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_MOD_FAILED;
-    else if (gOperationType == "search") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_SRCH_FAILED;
-    else task.logmsg("DEBUG", "getErrorReasonMessage: Invalid operation type " + gOperationType);
-
-    task.logmsg("DEBUG","getErrorReasonMessage: ReasonMessage: " + rmsg);
-    return rmsg;
-}]]></parameter>
-        </Script>
-    </Folder>
+    <Folder name="Scripts"/>
     <JavaLibraries/>
     <JavaProperties/>
     <Folder name="Includes"/>
@@ -268,7 +220,7 @@ function getErrorReasonMessage() {
     <Folder name="Schedules"/>
     <Folder name="Sequences"/>
     <Container name="Package">
-        <ModTime>1676940224217</ModTime>
+        <ModTime>1679608730379</ModTime>
         <Container name="Resources">
             <ParameterList name="Resource">
                 <parameter name="class">br.com.asyg.connector.bmg.kibana.KibanaConnector</parameter>
@@ -278,8 +230,10 @@ function getErrorReasonMessage() {
         </Container>
         <Container name="Operations"/>
         <ParameterList name="Info">
-            <parameter name="date">2023-02-20</parameter>
+            <parameter name="author">Elso A Silva</parameter>
+            <parameter name="date">2023-03-23</parameter>
             <parameter name="packageid">KibanaRestoreAccount</parameter>
+            <parameter name="version">1.0</parameter>
         </ParameterList>
     </Container>
 </MetamergeConfig>

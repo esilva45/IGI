@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig IDIversion="Created by SDI7.2 - 2022-02-21" created="Mon Feb 20 21:44:26 BRT 2023" createdBy="esilva" modified="Mon Feb 20 21:44:27 BRT 2023" modifiedBy="esilva" version="7.1.1">
+<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig IDIversion="Created by SDI7.2 - 2022-02-21" created="Fri Apr 28 21:04:37 BRT 2023" createdBy="esilva" modified="Fri Apr 28 21:04:55 BRT 2023" modifiedBy="esilva" version="7.1.1">
     <Folder name="AssemblyLines">
         <AssemblyLine name="KibanaTestConnection">
-            <ModTime>1676671487056</ModTime>
+            <ModTime>1682721309866</ModTime>
             <Settings/>
             <Hooks>
                 <Hook name="onsuccess">
@@ -40,18 +40,113 @@ var gOperationType = gALSettings.getStringParameter("OperationType");]]></Script
             <SandboxConfig/>
             <SimulationConfig>
                 <SimulationStates>
-                    <Component name="Success" state="Enabled"/>
+                    <Component name="KibanaConnector" state="Enabled"/>
                 </SimulationStates>
                 <ProxySettings/>
             </SimulationConfig>
             <LogConfig/>
             <ContainerEF name="EntryFeedContainer"/>
             <ContainerDF name="DataFlowContainer">
-                <Script name="Success">
-                    <ModTime>1676671487056</ModTime>
-                    <parameter name="script"><![CDATA[work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
-    Packages.com.ibm.itim.remoteservices.provider.Status.SUCCESSFUL));]]></parameter>
-                </Script>
+                <Connector name="KibanaConnector">
+                    <InheritFrom>system:/Connectors/KibanaConnector</InheritFrom>
+                    <ModTime>1682721309866</ModTime>
+                    <ConnectorMode>Lookup</ConnectorMode>
+                    <ConnectorState>Enabled</ConnectorState>
+                    <Configuration>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <parameter name="method">GET</parameter>
+                        <parameter name="operation"/>
+                        <parameter name="primary_group"/>
+                        <parameter encrypted="true" name="token"/>
+                        <parameter name="type">Test</parameter>
+                        <parameter name="url"/>
+                    </Configuration>
+                    <Parser>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Parser>
+                    <AttributeMap name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                        <AttributeMapItem>
+                            <Name>*</Name>
+                            <Type>simple</Type>
+                            <Simple>*</Simple>
+                        </AttributeMapItem>
+                    </AttributeMap>
+                    <AttributeMap name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </AttributeMap>
+                    <DeltaSettings/>
+                    <Schema name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <Schema name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <LinkCriteria>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </LinkCriteria>
+                    <Hooks>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <Hook name="default_fail">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>default_fail</Name>
+                            <Script><![CDATA[var work = system.newEntry();
+var ex = error.getObject("message");
+var errorStr = "Add Error: " + error.toString();
+
+if( error.getString("class") == "br.com.asyg.connector.exceptions.ConnectorException") {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.COMMUNICATION_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+} else if(work.getProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE) == Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL
+        && error.getString("class") == "com.ibm.di.exception.ITDIAgentException") {
+    throw error.getObject("exception");
+} else {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.PROCESSING_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+}
+
+var e = new Packages.com.ibm.di.exception.ITDIAgentException(errorStr);
+e.setEntry(work);
+task.dumpEntry(work);
+throw e;]]></Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                        <Hook name="default_ok">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>default_ok</Name>
+                            <Script><![CDATA[work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
+    Packages.com.ibm.itim.remoteservices.provider.Status.SUCCESSFUL));]]></Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                    </Hooks>
+                    <CheckpointConfig/>
+                    <SandboxConfig/>
+                    <Reconnect>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <ReconnectRules/>
+                    </Reconnect>
+                    <Operations/>
+                    <PoolDefinition>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </PoolDefinition>
+                    <PoolInstance/>
+                </Connector>
             </ContainerDF>
             <ThreadOptions/>
             <Operations/>
@@ -62,90 +157,7 @@ var gOperationType = gALSettings.getStringParameter("OperationType");]]></Script
     </Folder>
     <Folder name="Connectors"/>
     <Folder name="Parsers"/>
-    <Folder name="Scripts">
-        <Script name="Adapter Global Script">
-            <ModTime>1667948233865</ModTime>
-            <parameter name="autoInclude">true</parameter>
-            <parameter name="includeFiles"/>
-            <parameter name="script"><![CDATA[function initStatusCode() {
-    // Init status code to successful
-    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
-        Packages.com.ibm.itim.remoteservices.provider.Status.SUCCESSFUL));
-}
-
-function setStatusUnSuccessful() {
-    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
-        Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
-}
-
-function processError() {
-    work.removeAllAttributes();
-
-    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, 
-        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
-
-    if( error.getString("class") == "javax.naming.CommunicationException")
-    {
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
-            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.COMMUNICATION_ERROR));
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE, 
-            Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.CONNECTOR_CONNECTION_ERROR);
-
-    }
-    else if( error.getString("class") == "javax.naming.AuthenticationException")
-    {
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
-            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.AUTHENTICATION_ERROR));
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE, 
-            Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_INVALID_LOGIN_CREDENTIALS);
-    }
-    else if(error.getString("class") == "javax.naming.NameNotFoundException")
-    {
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
-            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.NAME_NOT_FOUND_ERROR));
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,getErrorReasonMessage());
-    }
-    else
-    {
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASONCODE, 
-            new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.PROCESSING_ERROR));
-        work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,getErrorReasonMessage());
-    }
-
-    var v = new Packages.java.util.Vector();
-    v.add(gOperationType + " Error: " + error.toString());
-    work.setProperty(Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE_ARGS, v);
-
-    var e = new Packages.com.ibm.di.exception.ITDIAgentException(gOperationType + " Error");
-    e.setEntry(work);
-    task.logmsg("DEBUG", "Process Error: Throwing ITDI Exception");
-    system.dumpEntry(work);
-    throw e;
-}
-
-function getErrorReasonMessage() {
-    var rmsg = "";
-    if (gOperationType == "add") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_ADD_FAILED;
-    else if (gOperationType == "modify") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_MOD_FAILED;
-    else if (gOperationType == "delete") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_DEL_FAILED;
-    else if (gOperationType == "suspend") 
-       rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_SUSPEND_FAILED;
-    else if (gOperationType == "restore") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_RESTORE_FAILED;
-    else if (gOperationType == "changepassword") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_MOD_FAILED;
-    else if (gOperationType == "search") 
-        rmsg = Packages.com.ibm.di.dispatcher.DispatcherReasonMessage.ADAPTER_SRCH_FAILED;
-    else task.logmsg("DEBUG", "getErrorReasonMessage: Invalid operation type " + gOperationType);
-
-    task.logmsg("DEBUG","getErrorReasonMessage: ReasonMessage: " + rmsg);
-    return rmsg;
-}]]></parameter>
-        </Script>
-    </Folder>
+    <Folder name="Scripts"/>
     <JavaLibraries/>
     <JavaProperties/>
     <Folder name="Includes"/>
@@ -159,27 +171,49 @@ function getErrorReasonMessage() {
     </Folder>
     <Folder name="Functions"/>
     <Folder name="AttributeMaps"/>
-    <Properties>
+    <Properties name="Properties">
         <Stores>
-            <PropertyStore name="system">
+            <PropertyStore name="Solution-Properties">
                 <Parser/>
                 <RawConnector>
                     <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
-                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/KibanaProfile/Resources/system.properties</parameter>
-                    <parameter name="collectionType">file</parameter>
-                    <parameter name="createCollection">true</parameter>
+                    <parameter name="collectionType">Solution-Properties</parameter>
                 </RawConnector>
                 <Key>key</Key>
                 <Value>value</Value>
                 <ReadOnly>false</ReadOnly>
                 <InitialLoad>true</InitialLoad>
-                <CacheTimeout>1000</CacheTimeout>
+                <CacheTimeout>0</CacheTimeout>
             </PropertyStore>
-            <PropertyStore name="java">
+            <PropertyStore name="Global-Properties">
                 <Parser/>
                 <RawConnector>
                     <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
-                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/KibanaProfile/Resources/java.properties</parameter>
+                    <parameter name="collectionType">Global-Properties</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>0</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="System-Properties">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collectionType">System-Properties</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>0</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="system">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/KibanaProfile/Resources/system.properties</parameter>
                     <parameter name="collectionType">file</parameter>
                     <parameter name="createCollection">true</parameter>
                 </RawConnector>
@@ -203,17 +237,66 @@ function getErrorReasonMessage() {
                 <InitialLoad>true</InitialLoad>
                 <CacheTimeout>1000</CacheTimeout>
             </PropertyStore>
+            <PropertyStore name="java">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/KibanaProfile/Resources/java.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>1000</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="KibanaProfile">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">@SUBSTITUTE{config.$directory}/KibanaProfile.properties</parameter>
+                    <parameter name="collectionType">KibanaProfile</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>0</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="Java-Properties">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">@SUBSTITUTE{config.$directory}/KibanaProfile.properties</parameter>
+                    <parameter name="collectionType">Java-Properties</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>0</CacheTimeout>
+            </PropertyStore>
         </Stores>
     </Properties>
     <Folder name="Schedules"/>
     <Folder name="Sequences"/>
     <Container name="Package">
-        <ModTime>1676940266707</ModTime>
-        <Container name="Resources"/>
+        <ModTime>1682726692822</ModTime>
+        <Container name="Resources">
+            <ParameterList name="Resource">
+                <parameter name="class">br.com.asyg.connector.bmg.kibana.KibanaConnector</parameter>
+                <parameter name="name">system:/Connectors/KibanaConnector</parameter>
+                <parameter name="type">Resource</parameter>
+                <parameter name="version"/>
+            </ParameterList>
+        </Container>
         <Container name="Operations"/>
         <ParameterList name="Info">
-            <parameter name="date">2023-02-20</parameter>
+            <parameter name="author">Elso A Silva</parameter>
+            <parameter name="date">2023-04-28</parameter>
             <parameter name="packageid">KibanaTestConnection</parameter>
+            <parameter name="version">1.0</parameter>
         </ParameterList>
     </Container>
 </MetamergeConfig>

@@ -19,8 +19,9 @@
       <connector name="KibanaConnector">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erprimarygroup)</default>
          </dispatcherParameter>
       </connector>
       <dispatcherParameter name="DisableAlCachPerService">
@@ -35,15 +36,17 @@
       <connector name="delete">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>delete/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>delete/$(SO!erurl)/$(SO!ertoken)/$(SO!erprimarygroup)</default>
          </dispatcherParameter>
       </connector>
       <connector name="lookup">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>lookup/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>lookup/$(SO!erurl)/$(SO!ertoken)/$(SO!erprimarygroup)</default>
          </dispatcherParameter>
       </connector>
       <dispatcherParameter name="DisableAlCachPerService">
@@ -58,8 +61,9 @@
       <connector name="KibanaConnector">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erprimarygroup)</default>
          </dispatcherParameter>
       </connector>
       <dispatcherParameter name="OperationType">   
@@ -77,8 +81,9 @@
       <connector name="KibanaConnector">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erprimarygroup)</default>
          </dispatcherParameter>
       </connector>
       <dispatcherParameter name="DisableAlCachPerService">
@@ -93,8 +98,9 @@
       <connector name="KibanaConnector">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erprimarygroup)</default>
          </dispatcherParameter>
       </connector>
       <dispatcherParameter name="DisableAlCachPerService">
@@ -109,8 +115,9 @@
       <connector name="KibanaConnector">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erprimarygroup)</default>
          </dispatcherParameter>
       </connector>
       <dispatcherParameter name="DisableAlCachPerService">
@@ -121,12 +128,12 @@
    <operation cn="KibanaRoles">
       <name>add-erKibanaGroups</name>
       <description>Group add operation</description>
-      <input name="eruid" source="eruid"/>
       <connector name="KibanaConnector">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erprimarygroup)</default>
          </dispatcherParameter>
       </connector>
       <dispatcherParameter name="DisableAlCachPerService">
@@ -137,12 +144,12 @@
    <operation cn="KibanaRoles">
       <name>delete-erKibanaGroups</name>
       <description>Group delete operation</description>
-      <input name="eruid" source="eruid"/>
       <connector name="KibanaConnector">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!erprimarygroup)</default>
          </dispatcherParameter>
       </connector>
       <dispatcherParameter name="DisableAlCachPerService">
@@ -158,15 +165,17 @@
       <connector name="searchRoles">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>searchRoles/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>searchRoles/$(SO!erurl)/$(SO!ertoken)/$(SO!primarygroup)</default>
          </dispatcherParameter>
       </connector>
       <connector name="searchUser">
          <parameter name="url" source="erurl">URL</parameter>
          <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
          <dispatcherParameter name="poolID">
-            <default>searchUser/$(SO!erurl)/$(SO!ertoken)</default>
+            <default>searchUser/$(SO!erurl)/$(SO!ertoken)/$(SO!primarygroup)</default>
          </dispatcherParameter>
       </connector>
       <dispatcherParameter name="DisableAlCachPerService">
@@ -178,6 +187,14 @@
       <name>test</name>
       <description/>
       <input name="eruid" source="eruid"/>
+      <connector name="KibanaConnector">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="token" source="ertoken">Token</parameter>
+         <parameter name="primary_group" source="erprimarygroup">Primary Group</parameter>
+         <dispatcherParameter name="poolID">
+            <default>KibanaConnector/$(SO!erurl)/$(SO!ertoken)/$(SO!primarygroup)</default>
+         </dispatcherParameter>
+      </connector>
       <dispatcherParameter name="DisableAlCachPerService">
          <default>true</default>
       </dispatcherParameter>

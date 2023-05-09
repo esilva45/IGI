@@ -16,14 +16,8 @@
             <formElement direction="inherit" label="$ertoken" name="data.ertoken" required="true">
                <input name="data.ertoken" type="password"/>
             </formElement>
-            <formElement direction="inherit" label="$erjdbcurl" name="data.erjdbcurl" required="true">
-               <input name="data.erjdbcurl" type="text"/>
-            </formElement>
-            <formElement direction="inherit" label="$erjdbcuser" name="data.erjdbcuser" required="true">
-               <input name="data.erjdbcuser" type="text"/>
-            </formElement>
-            <formElement direction="inherit" label="$erjdbcpassword" name="data.erjdbcpassword" required="true">
-               <input name="data.erjdbcpassword" type="password"/>
+            <formElement direction="inherit" label="$erprimarygroup" name="data.erprimarygroup" required="true">
+               <input name="data.erprimarygroup" type="text"/>
             </formElement>
          </tab>
       </tabbedForm>
