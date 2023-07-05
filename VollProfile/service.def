@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service erserviceproviderfactory="com.ibm.itim.remoteservices.provider.itdiprovider.ItdiServiceProviderFactory" name="VollProfile">
+   <type category="service" location="schema.dsml" name="erVollService" profile="VollProfile">
+      <key>
+         <field>erservicename</field>
+      </key>
+      <form location="erVollService.xml"/>
+   </type>
+   <type category="account" location="schema.dsml" name="erVollAccount" profile="VollAccount">
+      <key>
+         <field>eruid</field>
+      </key>
+      <form location="erVollAccount.xml"/>
+   </type>
+   <operation cn="VollAddAccount">
+      <name>add</name>
+      <description>add operations are supported by AddAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="add">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="ClientId" source="erClientId">Client ID</parameter>
+         <parameter name="ClientSecret" source="erClientSecret">Client Secret</parameter>
+         <dispatcherParameter name="poolID">
+            <default>VollConnector/$(SO!erurl)/$(SO!erClientId)/$(SO!erClientSecret)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>VollAddAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="VollDeleteAccount">
+      <name>delete</name>
+      <description>operation delete supported by DeleteAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="delete">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="ClientId" source="erClientId">Client ID</parameter>
+         <parameter name="ClientSecret" source="erClientSecret">Client Secret</parameter>
+         <dispatcherParameter name="poolID">
+            <default>VollConnector/$(SO!erurl)/$(SO!erClientId)/$(SO!erClientSecret)</default>
+         </dispatcherParameter>
+      </connector>
+      <connector name="lookup">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="ClientId" source="erClientId">Client ID</parameter>
+         <parameter name="ClientSecret" source="erClientSecret">Client Secret</parameter>
+         <dispatcherParameter name="poolID">
+            <default>VollConnector/$(SO!erurl)/$(SO!erClientId)/$(SO!erClientSecret)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>VollDeleteAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="VollModifyAccount">
+      <name>modify</name>
+      <description>operation modify supported by ModifyAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="modify">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="ClientId" source="erClientId">Client ID</parameter>
+         <parameter name="ClientSecret" source="erClientSecret">Client Secret</parameter>
+         <dispatcherParameter name="poolID">
+            <default>VollConnector/$(SO!erurl)/$(SO!erClientId)/$(SO!erClientSecret)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="OperationType">   
+         <default>$(OO!operation)</default>
+      </dispatcherParameter>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>VollModifyAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="VollTestConnection">
+      <name>test</name>
+      <description/>
+      <input name="eruid" source="eruid"/>
+      <connector name="test">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="ClientId" source="erClientId">Client ID</parameter>
+         <parameter name="ClientSecret" source="erClientSecret">Client Secret</parameter>
+         <dispatcherParameter name="poolID">
+            <default>VollConnector/$(SO!erurl)/$(SO!erClientId)/$(SO!erClientSecret)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>VollTestConnection.xml</assemblyLine>
+   </operation>
+   <properties>
+      <property name="AdapterCategory">
+         <value>Application</value>
+      </property>
+      <property name="ProfileVersion">
+         <value>1.0</value>
+      </property>
+      <property name="com.ibm.itim.remoteservices.ResourceProperties.PASSWORD_NOT_REQUIRED_ON_RESTORE">
+         <value>false</value>
+      </property>
+      <property name="com.ibm.itim.itdi.properties.RMI_URL" source="erITDIURL">
+         <value>rmi://localhost:1099/ITDIDispatcher</value>
+      </property>
+   </properties>
+   <AttributeMap>
+      <Attribute name="erLastAccessDate" profile="account" value="none"/>
+   </AttributeMap>
+</Service>
