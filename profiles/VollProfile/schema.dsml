@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsml>
+   <directory-schema>
+      <attribute-type single-value="true">
+         <name>erClientId</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.1</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erClientSecret</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.2</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erurl</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.3</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ername</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.4</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>eremail</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.5</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ergroupid</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.6</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erprofile</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.7</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erphone</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.8</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erworspaceId</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.9</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ertags</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.10</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erpreferredname</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.2.11</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <!--******************************************-->
+      <!--******  Objectclass definitions ******-->
+      <!--******       erVollaAccount    ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erVollAccount</name>
+         <description>Class representing an Voll Account</description>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.1.1</object-identifier>
+         <attribute ref="eruid" required="true"/>
+         <attribute ref="eraccountstatus" required="false"/>
+         <attribute ref="ername" required="true"/>
+         <attribute ref="eremail" required="true"/>
+         <attribute ref="ergroupid" required="false"/>
+         <attribute ref="erprofile" required="true"/>
+         <attribute ref="erphone" required="false"/>
+         <attribute ref="erworspaceId" required="false"/>
+         <attribute ref="ertags" required="false"/>
+         <attribute ref="erpreferredname" required="false"/>
+      </class>
+      <!--******************************************-->
+      <!--****** erKibanaService ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erVollService</name>
+         <description>Class representing an Voll service</description>
+         <object-identifier>1.3.6.1.4.1.6054.3.44.1.2</object-identifier>
+         <attribute ref="erservicename" required="true"/>
+         <attribute ref="eritdiurl" required="true"/>
+         <attribute ref="erurl" required="true"/>
+         <attribute ref="erClientId" required="true"/>
+         <attribute ref="erClientSecret" required="true"/>
+      </class>
+   </directory-schema>
+</dsml>
