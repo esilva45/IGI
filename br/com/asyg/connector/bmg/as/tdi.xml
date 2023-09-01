@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetamergeConfig created="Wed Nov 21 16:20:10 SGT 2007" version="7.1.1">
+	<Folder name="Connectors">
+		<Connector name="ASConnector">
+			<Configuration>
+				<parameter name="connectorType">br.com.asyg.connector.bmg.as.ASConnector</parameter>
+				<parameter name="parserOption">Useless</parameter>
+				<parameter name="url"/>
+			</Configuration>
+			<Schema name="Output">
+				<SchemaItem>
+					<Name>operation</Name>
+					<Syntax>String</Syntax>
+				</SchemaItem>
+			</Schema>
+		</Connector>
+	</Folder>
+	<Folder name="Forms">
+		<Form name="br.com.asyg.connector.bmg.as.ASConnector">
+			<TranslationFile>NLS/idi_conn_url</TranslationFile>
+			<FormSectionNames>
+				<ListItem>General</ListItem>
+			</FormSectionNames>
+			<FormSection name="General">
+				<FormSectionNames>
+					<ListItem>url</ListItem>
+					<ListItem>clientId</ListItem>
+					<ListItem>clientSecret</ListItem>
+					<ListItem>type</ListItem>
+					<ListItem>operation</ListItem>
+					<ListItem>method</ListItem>
+					<ListItem>jdbcurl</ListItem>
+					<ListItem>jdbcuser</ListItem>
+					<ListItem>jdbcpassword</ListItem>
+					<ListItem>filePath</ListItem>
+					<ListItem>$GLOBAL.userComment</ListItem>
+					<ListItem>$GLOBAL.debug</ListItem>
+				</FormSectionNames>
+			</FormSection>
+			<FormItemNames>
+				<ListItem>url</ListItem>
+				<ListItem>$GLOBAL.debug</ListItem>
+			</FormItemNames>
+			<FormItem name="url">
+				<parameter name="description">url</parameter>
+				<parameter name="label">URL</parameter>
+				<parameter name="Required">true</parameter>
+				<parameter name="syntax">STRING</parameter>
+			</FormItem>
+			<FormItem name="clientId">
+				<parameter name="description">clientId</parameter>
+				<parameter name="label">Client ID</parameter>
+				<parameter name="Required">true</parameter>
+				<parameter name="syntax">STRING</parameter>
+			</FormItem>
+			<FormItem name="clientSecret">
+				<parameter name="description">clientSecret</parameter>
+				<parameter name="label">Client Secret</parameter>
+				<parameter name="Required">true</parameter>
+				<parameter name="syntax">password</parameter>
+			</FormItem>
+			<FormItem name="type">
+				<parameter name="description">type</parameter>
+				<parameter name="label">Type</parameter>
+				<parameter name="Required">true</parameter>
+				<parameter name="syntax">STRING</parameter>
+			</FormItem>
+			<FormItem name="operation">
+				<parameter name="description">operation</parameter>
+				<parameter name="label">Operation</parameter>
+				<parameter name="Required">true</parameter>
+				<parameter name="syntax">STRING</parameter>
+			</FormItem>
+			<FormItem name="jdbcurl">
+				<parameter name="description">jdbcurl</parameter>
+				<parameter name="label">JDBC URL</parameter>
+				<parameter name="Required">true</parameter>
+				<parameter name="syntax">STRING</parameter>
+			</FormItem>
+			<FormItem name="jdbcuser">
+				<parameter name="description">jdbcuser</parameter>
+				<parameter name="label">JDBC User</parameter>
+				<parameter name="Required">true</parameter>
+				<parameter name="syntax">STRING</parameter>
+			</FormItem>
+			<FormItem name="jdbcpassword">
+				<parameter name="description">jdbcpassword</parameter>
+				<parameter name="label">JDBC Password</parameter>
+				<parameter name="Required">true</parameter>
+				<parameter name="syntax">password</parameter>
+			</FormItem>
+			<FormItem name="filePath">
+				<parameter name="description">filePath</parameter>
+				<parameter name="label">File Path</parameter>
+				<parameter name="Required">true</parameter>
+				<parameter name="syntax">STRING</parameter>
+			</FormItem>
+			<FormItem name="method">
+				<Values>
+					<ListItem>GET</ListItem>
+					<ListItem>POST</ListItem>
+					<ListItem>PUT</ListItem>
+					<ListItem>DELETE</ListItem>
+				</Values>
+				<LocalizedValues>
+					<Item>
+						<Key>DELETE</Key>
+						<Value>Localized.DELETE</Value>
+					</Item>
+					<Item>
+						<Key>GET</Key>
+						<Value>Localized.GET</Value>
+					</Item>
+					<Item>
+						<Key>POST</Key>
+						<Value>Localized.POST</Value>
+					</Item>
+					<Item>
+						<Key>PUT</Key>
+						<Value>Localized.PUT</Value>
+					</Item>
+				</LocalizedValues>
+				<parameter name="description">Method</parameter>
+				<parameter name="label">Method</parameter>
+				<parameter name="syntax">dropedit</parameter>
+				<parameter name="Required">true</parameter>
+			</FormItem>
+			<parameter name="title">ASConnector</parameter>
+		</Form>
+	</Folder>
+</MetamergeConfig>
