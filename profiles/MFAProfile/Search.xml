@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig IDIversion="Created by SDI7.2 - 2022-02-21" created="Wed Aug 30 11:39:19 BRT 2023" createdBy="esilva" modified="Wed Aug 30 11:39:29 BRT 2023" modifiedBy="esilva" version="7.1.1">
+    <Folder name="AssemblyLines">
+        <AssemblyLine name="Search">
+            <ModTime>1693406346085</ModTime>
+            <Settings/>
+            <Hooks>
+                <Hook name="prolog0">
+                    <Name>prolog0</Name>
+                    <Enabled>true</Enabled>
+                </Hook>
+            </Hooks>
+            <CheckpointConfig/>
+            <SandboxConfig/>
+            <SimulationConfig>
+                <SimulationStates>
+                    <Component name="Accounts" state="Enabled"/>
+                    <Component name="Methods" state="Enabled"/>
+                </SimulationStates>
+                <ProxySettings/>
+            </SimulationConfig>
+            <LogConfig/>
+            <ContainerEF name="EntryFeedContainer">
+                <Connector name="Accounts">
+                    <InheritFrom>system:/Connectors/MFAConnector</InheritFrom>
+                    <ModTime>1693406346085</ModTime>
+                    <ConnectorMode>Iterator</ConnectorMode>
+                    <ConnectorState>Enabled</ConnectorState>
+                    <Configuration>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <parameter name="clientId">a</parameter>
+                        <parameter encrypted="true" name="clientSecret">JEReaM3RMNQ9181QV1ujO349muFMNGMV45yPLGKpPBnXOYza+tyIC4Wo7FYIKWL7YO667tUtf6WKW9o47yR6CLy0YYnMLQZ+s3kkBveG23I/hyBPhdj/CQ66HziSojBT9ShRmXIqxzK8lwq29Ybeq4LIY9JeQWNiGUYGmynhV80=</parameter>
+                        <parameter name="grantType">a</parameter>
+                        <parameter name="method">GET</parameter>
+                        <parameter name="operation">Search</parameter>
+                        <parameter name="tenant">a</parameter>
+                        <parameter name="type">User</parameter>
+                        <parameter name="urlAuthentication">a</parameter>
+                        <parameter name="urlService">a</parameter>
+                    </Configuration>
+                    <Parser>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Parser>
+                    <AttributeMap name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                        <AttributeMapItem>
+                            <Name>$dn</Name>
+                            <Type>advanced</Type>
+                            <Script>conn.eruid</Script>
+                            <Simple>$dn</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>eruid</Name>
+                            <Type>simple</Type>
+                            <Simple>eruid</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>eremail</Name>
+                            <Type>simple</Type>
+                            <Simple>eremail</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erphonenumber</Name>
+                            <Type>simple</Type>
+                            <Simple>erphonenumber</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erroleid</Name>
+                            <Type>simple</Type>
+                            <Simple>erroleid</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ersmsstate</Name>
+                            <Type>simple</Type>
+                            <Simple>ersmsstate</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>objectclass</Name>
+                            <Type>advanced</Type>
+                            <Script>"erMFAAccount"</Script>
+                            <Simple>objectclass</Simple>
+                        </AttributeMapItem>
+                    </AttributeMap>
+                    <AttributeMap name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </AttributeMap>
+                    <DeltaSettings>
+                        <WhenToCommit>After every database operation</WhenToCommit>
+                        <RowLocking>SERIALIZABLE</RowLocking>
+                        <ChangeDetectionMode>DETECT_ALL</ChangeDetectionMode>
+                    </DeltaSettings>
+                    <Schema name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <Schema name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <LinkCriteria>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </LinkCriteria>
+                    <Hooks>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <Hook name="before_close">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>before_close</Name>
+                            <Script>result.setStatus(0);</Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                        <Hook name="default_fail">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>default_fail</Name>
+                            <Script><![CDATA[var work = system.newEntry();
+var ex = error.getObject("message");
+var errorStr = "Search User Error: " + error.toString();
+
+if( error.getString("class") == "br.com.asyg.connector.exceptions.ConnectorException") {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.COMMUNICATION_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+} else if(work.getProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE) == Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL
+        && error.getString("class") == "com.ibm.di.exception.ITDIAgentException") {
+    throw error.getObject("exception");
+} else {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.PROCESSING_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+
+}
+
+var e = new Packages.com.ibm.di.exception.ITDIAgentException(errorStr);
+e.setEntry(work);
+task.dumpEntry(work);
+throw e;]]></Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                        <Hook name="get_ok">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>get_ok</Name>
+                            <Script><![CDATA[task.logmsg("Work " + work);
+work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
+    Packages.com.ibm.itim.remoteservices.provider.Status.SUCCESSFUL));
+result.setStatus(1);]]></Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                    </Hooks>
+                    <CheckpointConfig/>
+                    <SandboxConfig/>
+                    <Reconnect>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <ReconnectRules/>
+                    </Reconnect>
+                    <Operations/>
+                    <PoolDefinition>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </PoolDefinition>
+                    <PoolInstance/>
+                </Connector>
+                <Connector name="Methods">
+                    <InheritFrom>system:/Connectors/MFAConnector</InheritFrom>
+                    <ModTime>1693406317046</ModTime>
+                    <ConnectorMode>Iterator</ConnectorMode>
+                    <ConnectorState>Enabled</ConnectorState>
+                    <Configuration>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <parameter name="clientId">a</parameter>
+                        <parameter encrypted="true" name="clientSecret">FvoVUoA1njK5JtaDVeVm1YkI9Zc9YfC5J3uapxrXyH8VZgY6LyZ6If9R2/4CtPsFzaY4u1548zKkgEmaX+ec6M/YTPK281dOYtpXEQg8J6Xz2sMfIfAdoflXabYONR0miuh4215FkBruYWlbILEJ3iTj5t32rixhEdjpzecQerQ=</parameter>
+                        <parameter name="grantType">a</parameter>
+                        <parameter name="method">GET</parameter>
+                        <parameter name="operation">Search</parameter>
+                        <parameter name="tenant">a</parameter>
+                        <parameter name="type">Methods</parameter>
+                        <parameter name="urlAuthentication">a</parameter>
+                        <parameter name="urlService">a</parameter>
+                    </Configuration>
+                    <Parser>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Parser>
+                    <AttributeMap name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                        <AttributeMapItem>
+                            <Name>$dn</Name>
+                            <Type>advanced</Type>
+                            <Script>"erroleid="+conn["erroleid"]</Script>
+                            <Simple>$dn</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erroleid</Name>
+                            <Type>simple</Type>
+                            <Simple>erroleid</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>errolename</Name>
+                            <Type>simple</Type>
+                            <Simple>errolename</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>objectclass</Name>
+                            <Type>advanced</Type>
+                            <Script>"erMFAMethods"</Script>
+                            <Simple>objectclass</Simple>
+                        </AttributeMapItem>
+                    </AttributeMap>
+                    <AttributeMap name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </AttributeMap>
+                    <DeltaSettings>
+                        <WhenToCommit>After every database operation</WhenToCommit>
+                        <RowLocking>SERIALIZABLE</RowLocking>
+                        <ChangeDetectionMode>DETECT_ALL</ChangeDetectionMode>
+                    </DeltaSettings>
+                    <Schema name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <Schema name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <LinkCriteria>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </LinkCriteria>
+                    <Hooks>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <Hook name="before_close">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>before_close</Name>
+                            <Script>result.setStatus(0);</Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                        <Hook name="default_fail">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>default_fail</Name>
+                            <Script><![CDATA[var work = system.newEntry();
+var ex = error.getObject("message");
+var errorStr = "Search User Error: " + error.toString();
+
+if( error.getString("class") == "br.com.asyg.connector.exceptions.ConnectorException") {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.COMMUNICATION_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+} else if(work.getProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE) == Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL
+        && error.getString("class") == "com.ibm.di.exception.ITDIAgentException") {
+    throw error.getObject("exception");
+} else {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.PROCESSING_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+
+}
+
+var e = new Packages.com.ibm.di.exception.ITDIAgentException(errorStr);
+e.setEntry(work);
+task.dumpEntry(work);
+throw e;]]></Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                        <Hook name="get_ok">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>get_ok</Name>
+                            <Script><![CDATA[task.logmsg("Work " + work);
+work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
+    Packages.com.ibm.itim.remoteservices.provider.Status.SUCCESSFUL));
+result.setStatus(1);]]></Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                    </Hooks>
+                    <CheckpointConfig/>
+                    <SandboxConfig/>
+                    <Reconnect>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <ReconnectRules/>
+                    </Reconnect>
+                    <Operations/>
+                    <PoolDefinition>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </PoolDefinition>
+                    <PoolInstance/>
+                </Connector>
+            </ContainerEF>
+            <ContainerDF name="DataFlowContainer"/>
+            <ThreadOptions/>
+            <Operations/>
+            <InitParams>
+                <Schema name="AssemblyLineInitParams"/>
+            </InitParams>
+        </AssemblyLine>
+    </Folder>
+    <Folder name="Connectors"/>
+    <Folder name="Parsers"/>
+    <Folder name="Scripts"/>
+    <JavaLibraries/>
+    <JavaProperties/>
+    <Folder name="Includes"/>
+    <Folder name="Config">
+        <LogConfig name="Logging"/>
+        <InstanceProperties name="AutoStart">
+            <AutoStart/>
+        </InstanceProperties>
+        <TombstonesConfig name="Tombstones"/>
+        <SolutionInterface name="SolutionInterface"/>
+    </Folder>
+    <Folder name="Functions"/>
+    <Folder name="AttributeMaps"/>
+    <Properties>
+        <Stores>
+            <PropertyStore name="system">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/Workspace/MFAProfile/Resources/system.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>0</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="java">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/Workspace/MFAProfile/Resources/java.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>0</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="solution">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/Workspace/MFAProfile/Resources/solution.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>0</CacheTimeout>
+            </PropertyStore>
+        </Stores>
+    </Properties>
+    <Folder name="Schedules"/>
+    <Folder name="Sequences"/>
+    <Container name="Package">
+        <ModTime>1693406368231</ModTime>
+        <Container name="Resources">
+            <ParameterList name="Resource">
+                <parameter name="class">br.com.asyg.connector.bmg.azure.MFAConnector</parameter>
+                <parameter name="name">system:/Connectors/MFAConnector</parameter>
+                <parameter name="type">Resource</parameter>
+                <parameter name="version"/>
+            </ParameterList>
+        </Container>
+        <Container name="Operations"/>
+        <ParameterList name="Info">
+            <parameter name="date">2023-08-30</parameter>
+            <parameter name="packageid">Search</parameter>
+        </ParameterList>
+    </Container>
+</MetamergeConfig>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsml>
+   <directory-schema>
+      <!--******  Entitlements ******-->
+      <attribute-type single-value="false">
+         <name>erRestrictiveId</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.1</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erRestrictiveName</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.2</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erRestrictiveDescription</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.3</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erRestrictiveType</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.4</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="false">
+         <name>erPermissiveId</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.5</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erPermissiveName</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.6</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erPermissiveDescription</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.7</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erPermissiveType</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.8</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <!--******  Service ******-->
+      <attribute-type single-value="true">
+         <name>erurl</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.9</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erclientSecret</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.10</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erclientId</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.11</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erjdbcurl</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.12</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erjdbcuser</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.13</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erjdbcpassword</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.14</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erfilepath</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.15</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <!--******  Account ******-->
+      <attribute-type single-value="true">
+         <name>ermatricula</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.16</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ernome</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.17</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>eremail</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.18</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ersituacao</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.19</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ercodigoCentroCusto</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.20</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ercodigoEmpresa</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.21</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ernivelCargo</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.22</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ercargo</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.23</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ercidade</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.24</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ersetor</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.25</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ercpfSuperior</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.26</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erdtNascimento</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.27</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erdtAdmissao</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.28</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erdtInclusao</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.29</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erdtModificacao</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.30</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erloginWindows</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.31</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erindicativoUsuarioEstrangeiro</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.32</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ercodigoCargo</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.33</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ercodigoEmpresaContratante</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.34</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>ercodigoSetor</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.35</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <attribute-type single-value="true">
+         <name>erdataExpiracao</name>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.2.36</object-identifier>
+         <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+      </attribute-type>
+      <!--******************************************-->
+      <!--******  Objectclass definitions ******-->
+      <!--******       erASAccount    ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erASAccount</name>
+         <description>Class representing an AS Account</description>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.1.1</object-identifier>
+         <attribute ref="eruid" required="true"/>
+         <attribute ref="eraccountstatus" required="false"/>
+         <attribute ref="ermatricula" required="false"/>
+         <attribute ref="ernome" required="false"/>
+         <attribute ref="eremail" required="false"/>
+         <attribute ref="ersituacao" required="false"/>
+         <attribute ref="ercodigoCentroCusto" required="false"/>
+         <attribute ref="ercodigoEmpresa" required="false"/>
+         <attribute ref="ernivelCargo" required="false"/>
+         <attribute ref="ercargo" required="false"/>
+         <attribute ref="ercidade" required="false"/>
+         <attribute ref="ersetor" required="false"/>
+         <attribute ref="ercpfSuperior" required="false"/>
+         <attribute ref="erdtNascimento" required="false"/>
+         <attribute ref="erdtAdmissao" required="false"/>
+         <attribute ref="erdtDesligamento" required="false"/>
+         <attribute ref="erdtInclusao" required="false"/>
+         <attribute ref="erdtModificacao" required="false"/>
+         <attribute ref="erloginWindows" required="false"/>
+         <attribute ref="erindicativoUsuarioEstrangeiro" required="false"/>
+         <attribute ref="ercodigoCargo" required="false"/>
+         <attribute ref="ercodigoEmpresaContratante" required="false"/>
+         <attribute ref="ercodigoSetor" required="false"/>
+         <attribute ref="erdataExpiracao" required="false"/>
+         <attribute ref="erpermissiveId" required="false"/>
+         <attribute ref="errestrictiveId" required="false"/>
+      </class>
+      <!--******************************************-->
+      <!--****** erASService ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erASService</name>
+         <description>Class representing an AS service</description>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.1.2</object-identifier>
+         <attribute ref="erservicename" required="true"/>
+         <attribute ref="eritdiurl" required="true"/>
+         <attribute ref="erurl" required="true"/>
+         <attribute ref="erclientSecret" required="false"/>
+         <attribute ref="erclientId" required="false"/>
+         <attribute ref="erjdbcurl" required="true"/>
+         <attribute ref="erjdbcuser" required="true"/>
+         <attribute ref="erjdbcpassword" required="true"/>
+         <attribute ref="erfilepath" required="true"/>
+      </class>
+      <!--******************************************-->
+      <!--****** Permission Type ******-->
+      <!--******************************************-->
+      <class superior="top">
+         <name>erASPermissiveGroups</name>
+         <description>Supporting data class</description>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.1.3</object-identifier>
+         <attribute ref="erpermissiveId" required="true"/>
+         <attribute ref="erpermissiveName" required="false"/>
+         <attribute ref="erpermissiveDescription" required="false"/>
+         <attribute ref="erpermissiveType" required="false"/>
+      </class>
+      <class superior="top">
+         <name>erASRestrictiveGroups</name>
+         <description>Supporting data class</description>
+         <object-identifier>1.3.6.1.4.1.6054.3.8160.1.4</object-identifier>
+         <attribute ref="errestrictiveId" required="true"/>
+         <attribute ref="errestrictiveName" required="false"/>
+         <attribute ref="errestrictiveDescription" required="false"/>
+         <attribute ref="errestrictiveType" required="false"/>
+      </class>
+   </directory-schema>
+</dsml>

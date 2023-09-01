@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service erserviceproviderfactory="com.ibm.itim.remoteservices.provider.itdiprovider.ItdiServiceProviderFactory" name="MFAProfile" xmlns:svc="urn:com:ibm:itim:service:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:ibm:itim:service:1 service.xsd ">
+	<type category="service" location="schema.dsml" name="erMFAService" profile="MFAProfile">
+		<key>
+			<field>erservicename</field>
+		</key>
+		<form location="erMFAService.xml"/>
+	</type>
+	<type category="account" location="schema.dsml" name="erMFAAccount" profile="MFAAccountProfile">
+		<key>
+			<field>eruid</field>
+		</key>
+		<form location="erMFAAccount.xml"/>
+	</type>
+	<operation cn="TestConnection">
+		<name>test</name>
+		<description>operation recon supported by SearchAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<input name="eremail" source="eremail"/>
+		<connector name="MFAConnector">
+			<parameter name="urlAuthentication" source="erUrlAuthentication">URL Authentication</parameter>
+			<parameter name="urlService" source="erUrlService">URL Service</parameter>
+			<parameter name="clientSecret" source="erclientSecret">client Secret</parameter>
+			<parameter name="grantType" source="ergrantType">Grant Type</parameter>
+			<parameter name="clientId" source="erclientId">Client ID</parameter>
+			<parameter name="tenant" source="ertenant">Tenant</parameter>
+			<dispatcherParameter name="poolID">
+				<default>MFAConnector/$(SO!erUrlAuthentication)/$(SO!erUrlService)/$(SO!erclientSecret)/$(SO!ergrantType)/$(SO!erclientId)/$(SO!ertenant)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>TestConnection.xml</assemblyLine>
+	</operation>
+	<operation cn="AddUser">
+		<name>add</name>
+		<description>add operations are supported by AddAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<input name="eremail" source="eremail"/>
+		<connector name="MFAConnector">
+			<parameter name="urlAuthentication" source="erUrlAuthentication">URL Authentication</parameter>
+			<parameter name="urlService" source="erUrlService">URL Service</parameter>
+			<parameter name="clientSecret" source="erclientSecret">client Secret</parameter>
+			<parameter name="grantType" source="ergrantType">Grant Type</parameter>
+			<parameter name="clientId" source="erclientId">Client ID</parameter>
+			<parameter name="tenant" source="ertenant">Tenant</parameter>
+			<dispatcherParameter name="poolID">
+				<default>MFAConnector/$(SO!erUrlAuthentication)/$(SO!erUrlService)/$(SO!erclientSecret)/$(SO!ergrantType)/$(SO!erclientId)/$(SO!ertenant)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>AddUser.xml</assemblyLine>
+	</operation>
+	<operation cn="Search">
+		<name>search</name>
+		<description>search operations are supported by SearchAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<input name="eremail" source="eremail"/>
+		<connector name="Accounts">
+			<parameter name="urlAuthentication" source="erUrlAuthentication">URL Authentication</parameter>
+			<parameter name="urlService" source="erUrlService">URL Service</parameter>
+			<parameter name="clientSecret" source="erclientSecret">client Secret</parameter>
+			<parameter name="grantType" source="ergrantType">Grant Type</parameter>
+			<parameter name="clientId" source="erclientId">Client ID</parameter>
+			<parameter name="tenant" source="ertenant">Tenant</parameter>
+			<dispatcherParameter name="poolID">
+				<default>Accounts/$(SO!erUrlAuthentication)/$(SO!erUrlService)/$(SO!erclientSecret)/$(SO!ergrantType)/$(SO!erclientId)/$(SO!ertenant)</default>
+			</dispatcherParameter>
+		</connector>
+		<connector name="Methods">
+			<parameter name="urlAuthentication" source="erUrlAuthentication">URL Authentication</parameter>
+			<parameter name="urlService" source="erUrlService">URL Service</parameter>
+			<parameter name="clientSecret" source="erclientSecret">client Secret</parameter>
+			<parameter name="grantType" source="ergrantType">Grant Type</parameter>
+			<parameter name="clientId" source="erclientId">Client ID</parameter>
+			<parameter name="tenant" source="ertenant">Tenant</parameter>
+			<dispatcherParameter name="poolID">
+				<default>Methods/$(SO!erUrlAuthentication)/$(SO!erUrlService)/$(SO!erclientSecret)/$(SO!ergrantType)/$(SO!erclientId)/$(SO!ertenant)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>Search.xml</assemblyLine>
+	</operation>
+	<operation cn="DeleteUser">
+		<name>delete</name>
+		<description>operation delete supported by DeleteAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<input name="eremail" source="eremail"/>
+		<connector name="delete">
+			<parameter name="urlAuthentication" source="erUrlAuthentication">URL Authentication</parameter>
+			<parameter name="urlService" source="erUrlService">URL Service</parameter>
+			<parameter name="clientSecret" source="erclientSecret">client Secret</parameter>
+			<parameter name="grantType" source="ergrantType">Grant Type</parameter>
+			<parameter name="clientId" source="erclientId">Client ID</parameter>
+			<parameter name="tenant" source="ertenant">Tenant</parameter>
+			<dispatcherParameter name="poolID">
+				<default>Methods/$(SO!erUrlAuthentication)/$(SO!erUrlService)/$(SO!erclientSecret)/$(SO!ergrantType)/$(SO!erclientId)/$(SO!ertenant)</default>
+			</dispatcherParameter>
+		</connector>
+		<connector name="lookup">
+			<parameter name="urlAuthentication" source="erUrlAuthentication">URL Authentication</parameter>
+			<parameter name="urlService" source="erUrlService">URL Service</parameter>
+			<parameter name="clientSecret" source="erclientSecret">client Secret</parameter>
+			<parameter name="grantType" source="ergrantType">Grant Type</parameter>
+			<parameter name="clientId" source="erclientId">Client ID</parameter>
+			<parameter name="tenant" source="ertenant">Tenant</parameter>
+			<dispatcherParameter name="poolID">
+				<default>Methods/$(SO!erUrlAuthentication)/$(SO!erUrlService)/$(SO!erclientSecret)/$(SO!ergrantType)/$(SO!erclientId)/$(SO!ertenant)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>DeleteUser.xml</assemblyLine>
+	</operation>
+	<operation cn="ModifyUser">
+		<name>modify</name>
+		<name>suspend</name>
+		<name>restore</name>
+		<name>changePassword</name>
+		<description>operation modify, suspend, restore, change password, validate password, test supported by ModifyAssemblyLine</description>
+		<input name="eruid" source="eruid"/>
+		<input name="eremail" source="eremail"/>
+		<connector name="MFAConnector">
+			<parameter name="urlAuthentication" source="erUrlAuthentication">URL Authentication</parameter>
+			<parameter name="urlService" source="erUrlService">URL Service</parameter>
+			<parameter name="clientSecret" source="erclientSecret">client Secret</parameter>
+			<parameter name="grantType" source="ergrantType">Grant Type</parameter>
+			<parameter name="clientId" source="erclientId">Client ID</parameter>
+			<parameter name="tenant" source="ertenant">Tenant</parameter>
+			<dispatcherParameter name="poolID">
+				<default>MFAConnector/$(SO!erUrlAuthentication)/$(SO!erUrlService)/$(SO!erclientSecret)/$(SO!ergrantType)/$(SO!erclientId)/$(SO!ertenant)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>ModifyUser.xml</assemblyLine>
+	</operation>
+	<properties>
+		<property name="com.ibm.itim.itdi.properties.RMI_URL" source="eritdiurl">
+			<value>rmi://localhost:1099/ITDIDispatcher</value>
+		</property>
+		<property name="AdapterCategory">
+			<value>Application</value>
+		</property>
+	</properties>
+	<AttributeMap>
+		<Attribute name="erLastAccessDate" profile="account" value="none"/>
+	</AttributeMap>
+	<ServiceGroups>
+      <GroupDefinition accountAttribute="erroleId" className="erMFAMethods" profileName="MFAMethods" rdnAttribute="erroleId">
+         <AttributeMap>
+            <Attribute name="erGroupId" value="erroleId"/>
+            <Attribute name="erGroupName" value="erroleName"/>
+         </AttributeMap>
+         <properties>
+            <property name="Managed">
+               <value>true</value>
+            </property>
+         </properties>
+         <form location="erMFAMethods.xml"/>
+      </GroupDefinition>
+   </ServiceGroups>
+</Service>

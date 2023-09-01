@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsml>
+  <directory-schema>
+    <attribute-type single-value="true">
+      <name>eruid</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.1</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>eraccountstatus</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.2</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erphoneNumber</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.3</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erclientSecret</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.4</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>ergrantType</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.5</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erclientId</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.6</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erurlAuthentication</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.7</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erurlService</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.8</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>ertenant</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.9</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>ersmsstate</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.10</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erroleid</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.11</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>errolename</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.12</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>eremail</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.2.13</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <!-- ******************************************************** -->
+    <!-- erMFAService Class        -->
+    <!-- ******************************************************** -->
+    <class superior="top">
+      <name>erMFAService</name>
+      <description>Class representing a RMI service provider for Adapter</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.1.2</object-identifier>
+      <attribute ref="erITDIurl" required="true"/>
+      <attribute ref="erurlAuthentication" required="true"/>
+      <attribute ref="erurlService" required="true"/>
+      <attribute ref="erclientSecret" required="true"/>
+      <attribute ref="ergrantType" required="true"/>
+      <attribute ref="erclientId" required="true"/>
+      <attribute ref="ertenant" required="true"/>
+    </class>
+    <!-- ******************************************************** -->
+    <!-- erMFAAccount Class         -->
+    <!-- ******************************************************** -->
+    <class superior="top">
+      <name>erMFAAccount</name>
+      <description>MFA account</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.45.1.1</object-identifier>
+      <attribute ref="eruid" required="false"/>
+      <attribute ref="eremail" required="false"/>
+      <attribute ref="eraccountstatus" required="false"/>
+      <attribute ref="erphoneNumber" required="false"/>
+      <attribute ref="ersmsState" required="false"/>
+      <attribute ref="erroleid" required="false"/>
+    </class>
+    <class superior="top">
+      <name>erMFAMethods</name>
+      <description>Supporting data class</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.8160.1.3</object-identifier>
+      <attribute ref="erroleid" required="true"/>
+      <attribute ref="errolename" required="false"/>
+    </class>
+  </directory-schema>
+</dsml>

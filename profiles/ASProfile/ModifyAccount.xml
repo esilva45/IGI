@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?><MetamergeConfig IDIversion="Created by SDI7.2 - 2022-02-21" created="Wed Aug 23 19:20:01 BRT 2023" createdBy="esilva" modified="Wed Aug 23 19:20:41 BRT 2023" modifiedBy="esilva" version="7.1.1">
+    <Folder name="AssemblyLines">
+        <AssemblyLine name="ModifyAccount">
+            <ModTime>1692828974240</ModTime>
+            <Settings/>
+            <Hooks>
+                <Hook name="prolog0">
+                    <InheritFrom>[no inheritance]</InheritFrom>
+                    <Name>prolog0</Name>
+                    <Script><![CDATA[// Import ITDI packages
+importPackage(Packages.com.ibm.di);
+importPackage(Packages.com.ibm.di.entry);
+importPackage(Packages.com.ibm.di.dispatcher);
+importPackage(Packages.com.ibm.di.connector);
+
+var adapterVersion = "1.0";
+task.logmsg("INFO","AS Adapter Version " + adapterVersion);
+
+// ITIM Account Objectclass
+var gITIMAccountObjectclass = "erASAccount";
+
+// Get AL config object.
+var gALCfg = task.getConfigClone();
+
+// Get AL settings object from AL config.
+var gALSettings = gALCfg.getSettings();
+
+// Get Parameters from TCB
+var gOperationType = gALSettings.getStringParameter("OperationType");]]></Script>
+                    <Enabled>true</Enabled>
+                </Hook>
+            </Hooks>
+            <CheckpointConfig/>
+            <SandboxConfig/>
+            <SimulationConfig>
+                <SimulationStates>
+                    <Component name="ASConnector" state="Simulated"/>
+                </SimulationStates>
+                <ProxySettings/>
+            </SimulationConfig>
+            <LogConfig/>
+            <ContainerEF name="EntryFeedContainer"/>
+            <ContainerDF name="DataFlowContainer">
+                <Connector name="ASConnector">
+                    <InheritFrom>system:/Connectors/ASConnector</InheritFrom>
+                    <ModTime>1692828974240</ModTime>
+                    <ConnectorMode>Update</ConnectorMode>
+                    <ConnectorState>Enabled</ConnectorState>
+                    <Configuration>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <parameter name="clientId"/>
+                        <parameter encrypted="true" name="clientSecret"/>
+                        <parameter name="filePath"/>
+                        <parameter encrypted="true" name="jdbcpassword"/>
+                        <parameter name="jdbcurl"/>
+                        <parameter name="jdbcuser"/>
+                        <parameter name="method">PUT</parameter>
+                        <parameter name="operation">Modify</parameter>
+                        <parameter name="type">User</parameter>
+                        <parameter name="url"/>
+                    </Configuration>
+                    <Parser>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Parser>
+                    <AttributeMap name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </AttributeMap>
+                    <AttributeMap name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                        <AttributeMapItem>
+                            <Name>ercargo</Name>
+                            <Type>simple</Type>
+                            <Simple>ercargo</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ercidade</Name>
+                            <Type>simple</Type>
+                            <Simple>ercidade</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ercodigoCargo</Name>
+                            <Type>simple</Type>
+                            <Simple>ercodigoCargo</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ercodigoCentroCusto</Name>
+                            <Type>simple</Type>
+                            <Simple>ercodigoCentroCusto</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ercodigoEmpresa</Name>
+                            <Type>simple</Type>
+                            <Simple>ercodigoEmpresa</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ercodigoEmpresaContratante</Name>
+                            <Type>simple</Type>
+                            <Simple>ercodigoEmpresaContratante</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ercodigoSetor</Name>
+                            <Type>simple</Type>
+                            <Simple>ercodigoSetor</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ercpfSuperior</Name>
+                            <Type>simple</Type>
+                            <Simple>ercpfSuperior</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erdataExpiracao</Name>
+                            <Type>simple</Type>
+                            <Simple>erdataExpiracao</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erdtAdmissao</Name>
+                            <Type>simple</Type>
+                            <Simple>erdtAdmissao</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erdtInclusao</Name>
+                            <Type>simple</Type>
+                            <Simple>erdtInclusao</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erdtNascimento</Name>
+                            <Type>simple</Type>
+                            <Simple>erdtNascimento</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>eremail</Name>
+                            <Type>simple</Type>
+                            <Simple>eremail</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erindicativoUsuarioEstrangeiro</Name>
+                            <Type>simple</Type>
+                            <Simple>erindicativoUsuarioEstrangeiro</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erloginWindows</Name>
+                            <Type>simple</Type>
+                            <Simple>erloginWindows</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ermatricula</Name>
+                            <Type>simple</Type>
+                            <Simple>ermatricula</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ernivelCargo</Name>
+                            <Type>simple</Type>
+                            <Simple>ernivelCargo</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ernome</Name>
+                            <Type>simple</Type>
+                            <Simple>ernome</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>erpermissiveId</Name>
+                            <Type>simple</Type>
+                            <Simple>erpermissiveId</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>errestrictiveId</Name>
+                            <Type>simple</Type>
+                            <Simple>errestrictiveId</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>ersetor</Name>
+                            <Type>simple</Type>
+                            <Simple>ersetor</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>grpoperation</Name>
+                            <Type>advanced</Type>
+                            <Script><![CDATA[var attName = work.getAttributeNames();
+                                for (i = 0; i < attName.length; i++) {
+                                    att = work.getAttribute(attName[i]);
+                                    task.logmsg("INFO","Attribute " + attName[i]);
+                                    
+                                    if(attName[i] == "errestrictiveid" || attName[i] == "erpermissiveid") {
+                                        ret.value = att.getOperation();
+                                    }}]]></Script>
+                            <Simple>grpoperation</Simple>
+                        </AttributeMapItem>
+                        <AttributeMapItem>
+                            <Name>operation</Name>
+                            <Type>simple</Type>
+                            <Simple>operation</Simple>
+                        </AttributeMapItem>
+                    </AttributeMap>
+                    <DeltaSettings/>
+                    <Schema name="Input">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <Schema name="Output">
+                        <InheritFrom>[parent]</InheritFrom>
+                    </Schema>
+                    <LinkCriteria>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <LinkCriteriaItem>
+                            <Key>189a33f54fd</Key>
+                            <Attribute>eruid</Attribute>
+                            <Operator>equals</Operator>
+                            <Value>$eruid</Value>
+                        </LinkCriteriaItem>
+                    </LinkCriteria>
+                    <Hooks>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <Hook name="default_fail">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>default_fail</Name>
+                            <Script><![CDATA[var work = system.newEntry();
+var ex = error.getObject("message");
+var errorStr = "Modify Error: " + error.toString();
+
+if( error.getString("class") == "br.com.asyg.connector.exceptions.ConnectorException") {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.COMMUNICATION_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+} else if(work.getProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE) == Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL
+        && error.getString("class") == "com.ibm.di.exception.ITDIAgentException") {
+    throw error.getObject("exception");
+} else {
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.STATUSCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Status.UNSUCCESSFUL));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASONCODE,
+        new Packages.java.lang.Integer(Packages.com.ibm.itim.remoteservices.provider.Reason.PROCESSING_ERROR));
+    
+    work.setProperty(
+        Packages.com.ibm.di.dispatcher.Defs.REASON_MESSAGE,error.getObject("message"));
+
+}
+
+var e = new Packages.com.ibm.di.exception.ITDIAgentException(errorStr);
+e.setEntry(work);
+task.dumpEntry(work);
+throw e;]]></Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                        <Hook name="default_ok">
+                            <InheritFrom>[no inheritance]</InheritFrom>
+                            <Name>default_ok</Name>
+                            <Script><![CDATA[work.setProperty(Packages.com.ibm.di.dispatcher.Defs.STATUSCODE, new Packages.java.lang.Integer(
+    Packages.com.ibm.itim.remoteservices.provider.Status.SUCCESSFUL));]]></Script>
+                            <Enabled>true</Enabled>
+                        </Hook>
+                    </Hooks>
+                    <CheckpointConfig/>
+                    <SandboxConfig/>
+                    <Reconnect>
+                        <InheritFrom>[parent]</InheritFrom>
+                        <ReconnectRules/>
+                    </Reconnect>
+                    <Operations/>
+                    <PoolDefinition>
+                        <InheritFrom>[parent]</InheritFrom>
+                    </PoolDefinition>
+                    <PoolInstance/>
+                </Connector>
+            </ContainerDF>
+            <ThreadOptions/>
+            <Operations/>
+            <InitParams>
+                <Schema name="AssemblyLineInitParams"/>
+            </InitParams>
+        </AssemblyLine>
+    </Folder>
+    <Folder name="Connectors"/>
+    <Folder name="Parsers"/>
+    <Folder name="Scripts"/>
+    <JavaLibraries/>
+    <JavaProperties/>
+    <Folder name="Includes"/>
+    <Folder name="Config">
+        <LogConfig name="Logging"/>
+        <InstanceProperties name="AutoStart">
+            <AutoStart/>
+        </InstanceProperties>
+        <TombstonesConfig name="Tombstones"/>
+        <SolutionInterface name="SolutionInterface"/>
+    </Folder>
+    <Folder name="Functions"/>
+    <Folder name="AttributeMaps"/>
+    <Properties>
+        <Stores>
+            <PropertyStore name="system">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/ASProfile/Resources/system.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>1000</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="java">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/ASProfile/Resources/java.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>1000</CacheTimeout>
+            </PropertyStore>
+            <PropertyStore name="solution">
+                <Parser/>
+                <RawConnector>
+                    <InheritFrom>system:/Connectors/ibmdi.Properties</InheritFrom>
+                    <parameter name="collection">/opt/IBM/TDI/V7.2/workspace/ASProfile/Resources/solution.properties</parameter>
+                    <parameter name="collectionType">file</parameter>
+                    <parameter name="createCollection">true</parameter>
+                </RawConnector>
+                <Key>key</Key>
+                <Value>value</Value>
+                <ReadOnly>false</ReadOnly>
+                <InitialLoad>true</InitialLoad>
+                <CacheTimeout>1000</CacheTimeout>
+            </PropertyStore>
+        </Stores>
+    </Properties>
+    <Folder name="Schedules"/>
+    <Folder name="Sequences"/>
+    <Container name="Package">
+        <ModTime>1692829214635</ModTime>
+        <Container name="Resources">
+            <ParameterList name="Resource">
+                <parameter name="class">br.com.asyg.connector.bmg.as.ASConnector</parameter>
+                <parameter name="name">system:/Connectors/ASConnector</parameter>
+                <parameter name="type">Resource</parameter>
+                <parameter name="version"/>
+            </ParameterList>
+        </Container>
+        <Container name="Operations"/>
+        <ParameterList name="Info">
+            <parameter name="author">Elso A Silva</parameter>
+            <parameter name="date">2023-08-23</parameter>
+            <parameter name="packageid">ModifyAccount</parameter>
+        </ParameterList>
+    </Container>
+</MetamergeConfig>

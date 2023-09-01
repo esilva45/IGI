@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+   <body>
+      <tabbedForm>
+         <tab index="0" selected="true">
+            <title><![CDATA[$ASProfileDesc]]></title>
+            <formElement direction="inherit" label="$erservicename" name="data.erservicename">
+               <input name="data.erservicename" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$eritdiurl" name="data.eritdiurl" required="true">
+               <input name="data.eritdiurl" type="text" value="rmi://localhost:1099/ITDIDispatcher"/>
+            </formElement>
+            <formElement direction="inherit" label="$erurl" name="data.erurl" required="true">
+               <input name="data.erurl" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erclientId" name="data.erclientId" required="false">
+               <input name="data.erclientId" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erclientSecret" name="data.erclientSecret" required="false">
+               <input name="data.erclientSecret" type="password"/>
+            </formElement>
+            <formElement direction="inherit" label="$erfilepath" name="data.erfilepath" required="true">
+               <input name="data.erfilepath" type="text"/>
+            </formElement>
+         </tab>
+         <tab index="1">
+            <title><![CDATA[$JDBCConnection]]></title>
+            <formElement direction="inherit" label="$erjdbcurl" name="data.erjdbcurl" required="true">
+               <input name="data.erjdbcurl" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erjdbcuser" name="data.erjdbcuser" required="true">
+               <input name="data.erjdbcuser" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erjdbcpassword" name="data.erjdbcpassword" required="true">
+               <input name="data.erjdbcpassword" type="password"/>
+            </formElement>
+         </tab>
+      </tabbedForm>
+   </body>
+</page>
