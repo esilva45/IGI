@@ -7,6 +7,7 @@ public class Account {
 	private String phoneNumber;
 	private String smsSignInState;
 	private JSONArray roleid;
+	private int status;
 	
 	public JSONArray getRoleid() {
 		return roleid;
@@ -31,5 +32,11 @@ public class Account {
 	}
 	public void setSmsSignInState(String smsSignInState) {
 		this.smsSignInState = smsSignInState;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }
