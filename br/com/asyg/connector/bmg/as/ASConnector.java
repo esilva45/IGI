@@ -47,11 +47,18 @@ public class ASConnector extends Connector implements ConnectorInterface {
 	private static Util util = new Util();
 	private int current;
 	
+	/**
+	 * In the constructor you will usually set the name of your Connector (using the "setName(...)" 
+	 * method) and define what modes - Iterator, Lookup, AddOnly, Server, Delta etc
+	 */
 	public ASConnector() {
 		setName("AS Connector");
 		setModes(new String[] { "Iterator", "AddOnly", "Update", "Lookup", "Delete" });
 	}
 	
+	/**
+	 * Method is called by the AssemblyLine after it has finished cycling and before it terminates.
+	 */
 	public void terminate() throws Exception {
 		loginfo("Terminate AS Connector");
 		
@@ -68,6 +75,11 @@ public class ASConnector extends Connector implements ConnectorInterface {
 		super.terminate();
 	}
 	
+	/**
+	 * This method is called by the AssemblyLine before it starts cycling. 
+	 * In general anybody who creates and uses a Connector programmatically should call "initialize(...)" 
+	 * after constructing the Connector and before calling any other method
+	 */
 	public void initialize(Object o) throws Exception {
 		loginfo("Initialize AS Connector");
 		
@@ -105,6 +117,9 @@ public class ASConnector extends Connector implements ConnectorInterface {
 		return VERSION_INFO;
 	}
 	
+	/**
+	 * Required for Iterator mode. This method is called only when the Connector is used in Iterator mode, after it has been initialized
+	 */
 	public void selectEntries() throws Exception {
 		loginfo("Entering selectEntries() method");
 		String cpf = "", date_s = "", codigoNivel = "", codigoProjeto = "", tipoNivel = "", descricaoNivel = "", ret = "SUCCESS", test = "";
@@ -189,6 +204,7 @@ public class ASConnector extends Connector implements ConnectorInterface {
 								
 								if (!jaccess.isEmpty()) {
 									for (int z = 0; z < jaccess.length(); z++) {
+										codigoNivel = ""; codigoProjeto = ""; tipoNivel = "";
 										JSONObject d1 = jaccess.getJSONObject(z);
 										codigoNivel = String.valueOf(d1.isNull("CodigoNivel") ? 0 : d1.getInt("CodigoNivel"));
 										codigoProjeto = d1.isNull("CodigoProjeto") ? "" : d1.getString("CodigoProjeto");
@@ -199,8 +215,6 @@ public class ASConnector extends Connector implements ConnectorInterface {
 										} else {
 											tmp2.put("AS-" + codigoProjeto + "-" + codigoNivel + "-" + tipoNivel);
 										}
-										
-										codigoNivel = ""; codigoProjeto = ""; tipoNivel = "";
 									}
 					            }
 								
@@ -224,6 +238,7 @@ public class ASConnector extends Connector implements ConnectorInterface {
 							ret = jarray.getJSONObject(0).getString("Error");
 						} else {
 							for (int x = 0; x < jarray.length(); x++) {
+								codigoNivel = ""; codigoProjeto = ""; tipoNivel = ""; descricaoNivel = "";
 								Entitlements ent = new Entitlements();
 								JSONObject d = jarray.getJSONObject(x);
 								
@@ -245,8 +260,6 @@ public class ASConnector extends Connector implements ConnectorInterface {
 										perList.add(ent);
 									}
 								}
-								
-								codigoNivel = ""; codigoProjeto = ""; tipoNivel = ""; descricaoNivel = "";
 							}
 						}
 					}
@@ -263,6 +276,8 @@ public class ASConnector extends Connector implements ConnectorInterface {
 							ret = jarray.getJSONObject(0).getString("Error");
 						} else {
 							for (int x = 0; x < jarray.length(); x++) {
+								codigoNivel = ""; codigoProjeto = ""; tipoNivel = ""; descricaoNivel = "";
+								
 								Entitlements ent = new Entitlements();
 								JSONObject d = jarray.getJSONObject(x);
 								
@@ -284,8 +299,6 @@ public class ASConnector extends Connector implements ConnectorInterface {
 										resList.add(ent);
 									}
 								}
-								
-								codigoNivel = ""; codigoProjeto = ""; tipoNivel = ""; descricaoNivel = "";
 							}
 						}
 					}
@@ -307,6 +320,10 @@ public class ASConnector extends Connector implements ConnectorInterface {
 	    }
 	}
 	
+	/**
+	 * Required for Iterator mode. This is the method called on each AssemblyLine's iteration when the Connector is in Iterator mode.
+	 * It is expected to return a single Entry that feeds the rest of the AssemblyLine
+	 */
 	public synchronized Entry getNextEntry() throws Exception {
 		loginfo("Entering getNextEntry() method");
 		Entry entry = null;
@@ -426,6 +443,10 @@ public class ASConnector extends Connector implements ConnectorInterface {
 		loginfo("querySchema");
 	}
 	
+	/**
+	 * Required for Lookup, Update and Delete modes. 
+	 * It is called once on each AssemblyLine iteration when the Connector performs a Lookup operation
+	 */
 	public Entry findEntry(SearchCriteria paramSearchCriteria) throws Exception {
 		loginfo("Entering findEntry() method");
 		Entry entry = new Entry();
@@ -437,6 +458,7 @@ public class ASConnector extends Connector implements ConnectorInterface {
 				logerror("return " + ret);
 				throw new Exception(String.valueOf(ret));
 			}
+			
 			entry = new Entry();
 		} else {
 			entry = new Entry();
@@ -447,6 +469,9 @@ public class ASConnector extends Connector implements ConnectorInterface {
 		return entry;
 	}
 	
+	/**
+	 * Required for Delete mode
+	 */
 	public void deleteEntry(Entry entry, SearchCriteria search) throws Exception {
 		loginfo("Entering deleteEntry() method");
 		JSONObject j1 = new JSONObject();
@@ -467,11 +492,14 @@ public class ASConnector extends Connector implements ConnectorInterface {
 	    }
 	}
 	
+	/**
+	 * Required for AddOnly and Update modes. It is called once on each AssemblyLine iteration when the Connector is used in AddOnly mode
+	 */
 	public void putEntry(Entry entry) throws Exception {
 		loginfo("Entering putEntry() method");
 		
 		try {
-			String ret = addAccount(entry);
+			String ret = addAccount(entry, 0, entry.getString("eruid"));
 			
 			if (!ret.equals("SUCCESS")) {
 				logerror("Exception putEntry " + ret);
@@ -484,21 +512,24 @@ public class ASConnector extends Connector implements ConnectorInterface {
 	    }
 	}
 	
-	public String addAccount(Entry entry) {
+	/**
+	 * Metodo para criar a conta no sistema
+	 * @return codigo do status
+	 * @param entry: array com os dados da conta
+	 * @param status: status da conta
+	 */
+	public String addAccount(Entry entry, int status, String cpf) {
 		loginfo("Entering addAccount() method");
-		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		JSONObject j1 = new JSONObject();
-		String ret = "SUCCESS";
-		Date date = null;
+		String ret = "SUCCESS", date = null;
 		
 		try {
 			if (type.equals("User")) {
-				j1.put("CPF", entry.getString("eruid"));
+				j1.put("CPF", cpf);
 				j1.put("Matricula", entry.getString("ermatricula"));
 				j1.put("Nome", entry.getString("ernome"));
 				j1.put("Email", entry.getString("eremail"));
-				j1.put("Situacao", 0);
+				j1.put("Situacao", status);
 				j1.put("CodigoCentroCusto", util.isNullOrEmpty(entry.getString("ercodigoCentroCusto")) ? JSONObject.NULL : Integer.parseInt(entry.getString("ercodigoCentroCusto")));
 				j1.put("CodigoEmpresa", util.isNullOrEmpty(entry.getString("ercodigoEmpresa")) ? JSONObject.NULL : Integer.parseInt(entry.getString("ercodigoEmpresa")));
 				j1.put("NivelCargo", entry.getString("ernivelCargo"));
@@ -507,28 +538,18 @@ public class ASConnector extends Connector implements ConnectorInterface {
 				j1.put("Setor", entry.getString("ersetor"));
 				j1.put("CpfSuperiorImediato", entry.getString("ercpfSuperior"));
 				
-				if (!util.isNullOrEmpty(entry.getString("erdtNascimento")))
-					date = dt.parse(entry.getString("erdtNascimento"));
+				date = util.dateFormat(entry.getString("erdtNascimento"));
+				j1.put("DataNascimento", date == null ? JSONObject.NULL : date);
 				
-				j1.put("DataNascimento", date == null ? JSONObject.NULL : dt1.format(date));
-				date = null;
+				date = util.dateFormat(entry.getString("erdtAdmissao"));
+				j1.put("DataAdmissao", date == null ? JSONObject.NULL : date);
 				
-				if (!util.isNullOrEmpty(entry.getString("erdtAdmissao")))
-					date = dt.parse(entry.getString("erdtAdmissao"));
+				date = util.dateFormat(entry.getString("erdtInclusao"));
+				j1.put("DataInclusao", date == null ? JSONObject.NULL : date);
 				
-				j1.put("DataAdmissao", date == null ? JSONObject.NULL : dt1.format(date));
-				date = null;
+				date = util.dateFormat(entry.getString("erdataExpiracao"));
+				j1.put("DataExpiracao", date == null ? JSONObject.NULL : date);
 				
-				if (!util.isNullOrEmpty(entry.getString("erdtInclusao")))
-					date = dt.parse(entry.getString("erdtInclusao"));
-				
-				j1.put("DataInclusao", date == null ? JSONObject.NULL : dt1.format(date));
-				date = null;
-				
-				if (!util.isNullOrEmpty(entry.getString("erdataExpiracao")))
-					date = dt.parse(entry.getString("erdataExpiracao"));
-				
-				j1.put("DataExpiracao", date == null ? JSONObject.NULL : dt1.format(date));
 				j1.put("LoginWindows", entry.getString("erloginWindows"));
 				j1.put("IndicativoUsuarioEstrangeiro", util.isNullOrEmpty(entry.getString("erindicativoUsuarioEstrangeiro")) ? JSONObject.NULL : Integer.parseInt(entry.getString("erindicativoUsuarioEstrangeiro")));
 				j1.put("CodigoCargo", util.isNullOrEmpty(entry.getString("ercodigoCargo")) ? JSONObject.NULL : Integer.parseInt(entry.getString("ercodigoCargo")));
@@ -550,53 +571,90 @@ public class ASConnector extends Connector implements ConnectorInterface {
 		return ret;
 	}
 	
+	/**
+	 * Required for Update mode
+	 */
 	public void modEntry(Entry entry, SearchCriteria search, Entry old) throws Exception {
 		loginfo("modEntry " + operation + ", entry " + entry + ", old " + old);
-		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		JSONObject j1 = null;
-		String context = "";
-		Date date = null;
-		JSONObject jsonResult = null;
+		JSONObject jsonResult = new JSONObject();
+		String context = "", date = null, ret = "SUCCESS";
+		boolean exist = false;
 		
 		try {
-			logmsg("getAttributeNames " + entry.getAttributeNames().toString());
-			logmsg("getOp " + entry.getOp());
+			logmsg("getOperation " + entry.getOperation());
+			logmsg("getOperation " + old.getOperation());
 			logmsg("uid " + uid);
 			
-			switch (operation) {
-				case "Suspend":
+			switch (operation.toLowerCase()) {
+				case "suspend":
 					j1 = new JSONObject();
 					j1.put("CPF", uid);
 					j1.put("Situacao",  Integer.parseInt(getStatus(uid)));
 					
-					jsonResult = sendPut("/alterausuario", j1.toString());
+					exist = searchAccouunt("/buscausuario/" + uid, "");
 					
-					if (jsonResult.has("Error")) {
-						throw new Exception(String.valueOf(jsonResult.getString("Error")));
+					if (!exist) {
+						ret = addAccount(entry, Integer.parseInt(getStatus(uid)), uid);
+
+						if (ret.equals("SUCCESS")) {
+							jsonResult.put("Success", "OK");
+						} else {
+							jsonResult.put("Error", ret);
+						}
+					} else {
+						jsonResult = sendPut("/alterausuario", j1.toString());
+						
+						if (jsonResult.has("Error")) {
+							throw new Exception(String.valueOf(jsonResult.getString("Error")));
+						}
 					}
 					
 					break;
-				case "Restore":
+				case "restore":
 					j1 = new JSONObject();
 					j1.put("CPF", uid);
 					j1.put("Situacao", 0);
 					
-					jsonResult = sendPut("/alterausuario", j1.toString());
+					exist = searchAccouunt("/buscausuario/" + uid, "");
+					
+					if (!exist) {
+						ret = addAccount(entry, 0, uid);
+
+						if (ret.equals("SUCCESS")) {
+							jsonResult.put("Success", "OK");
+						} else {
+							jsonResult.put("Error", ret);
+						}
+					} else {
+						jsonResult = sendPut("/alterausuario", j1.toString());
+					}
 					
 					if (jsonResult.has("Error")) {
 						throw new Exception(String.valueOf(jsonResult.getString("Error")));
 					}
 					
 					break;
-				case "Modify":
+				case "modify":
 					j1 = new JSONObject();
+					
+					exist = searchAccouunt("/buscausuario/" + uid, "");
 					
 					if (!util.isNullOrEmpty(entry.getString("errestrictiveId")) || !util.isNullOrEmpty(entry.getString("erpermissiveId"))) {
 						String[] values = null;
 						logmsg("Operation: " + entry.getString("grpoperation"));
 						
 						if (entry.getString("grpoperation").equals("add")) {
+							if (!exist) {
+								ret = addAccount(entry, Integer.parseInt(getStatus(uid)), uid);
+
+								if (ret.equals("SUCCESS")) {
+									jsonResult.put("Success", "OK");
+								} else {
+									jsonResult.put("Error", ret);
+								}
+							}
+							
 							context = "/adicionaacesso";
 					    } else {
 					    	context = "/removeacesso";
@@ -614,79 +672,48 @@ public class ASConnector extends Connector implements ConnectorInterface {
 						
 						jsonResult = sendPost(context, j1.toString());
 					} else {
-						j1.put("CPF", uid);
-						
-						if (!util.isNullOrEmpty(entry.getString("ermatricula")))
+						if (!exist) {
+							ret = addAccount(entry, Integer.parseInt(getStatus(uid)), uid);
+
+							if (ret.equals("SUCCESS")) {
+								jsonResult.put("Success", "OK");
+							} else {
+								jsonResult.put("Error", ret);
+							}
+						} else {
+							j1.put("CPF", uid);
 							j1.put("Matricula", entry.getString("ermatricula"));
-						
-			            if (!util.isNullOrEmpty(entry.getString("ernome")))
 			            	j1.put("Nome", entry.getString("ernome"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("eremail")))
 			            	j1.put("Email", entry.getString("eremail"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ercodigoCentroCusto")))
 			            	j1.put("CodigoCentroCusto", Integer.parseInt(entry.getString("ercodigoCentroCusto")));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ercodigoEmpresa")))
 			            	j1.put("CodigoEmpresa", Integer.parseInt(entry.getString("ercodigoEmpresa")));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ernivelCargo")))
 			            	j1.put("NivelCargo", entry.getString("ernivelCargo"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ercargo")))
 			            	j1.put("Cargo", entry.getString("ercargo"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ercidade")))
 			            	j1.put("Cidade", entry.getString("ercidade"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ersetor")))
 			            	j1.put("Setor", entry.getString("ersetor"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ercpfSuperior")))
 			            	j1.put("CpfSuperiorImediato", entry.getString("ercpfSuperior"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("erdtNascimento"))) {
-							date = dt.parse(entry.getString("erdtNascimento"));
-							j1.put("DataNascimento", date != null ? JSONObject.NULL : dt1.format(date));
-							date = null;
-						}
-			            
-						if (!util.isNullOrEmpty(entry.getString("erdtAdmissao"))) {
-							date = dt.parse(entry.getString("erdtAdmissao"));
-							j1.put("DataAdmissao", date != null ? JSONObject.NULL : dt1.format(date));
-							date = null;
-						}
-						
-						if (!util.isNullOrEmpty(entry.getString("erdtInclusao"))) {
-							date = dt.parse(entry.getString("erdtInclusao"));
-							j1.put("DataInclusao", date != null ? JSONObject.NULL : dt1.format(date));
-							date = null;
-						}
-						
-						if (!util.isNullOrEmpty(entry.getString("erdataExpiracao"))) {
-							date = dt.parse(entry.getString("erdataExpiracao"));
-							j1.put("DataExpiracao", date != null ? JSONObject.NULL : dt1.format(date));
-						}
-						
-			            if (!util.isNullOrEmpty(entry.getString("erloginWindows")))
+							
+			            	date = util.dateFormat(entry.getString("erdtNascimento"));
+							j1.put("DataNascimento", date != null ? JSONObject.NULL : date);
+							
+							date = util.dateFormat(entry.getString("erdtAdmissao"));
+							j1.put("DataAdmissao", date != null ? JSONObject.NULL : date);
+							
+							date = util.dateFormat(entry.getString("erdtInclusao"));
+							j1.put("DataInclusao", date != null ? JSONObject.NULL : date);
+							
+							date = util.dateFormat(entry.getString("erdataExpiracao"));
+							j1.put("DataExpiracao", date != null ? JSONObject.NULL : date);
+							
 			            	j1.put("LoginWindows", entry.getString("erloginWindows"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("erindicativoUsuarioEstrangeiro")))
 			            	j1.put("IndicativoUsuarioEstrangeiro", entry.getString("erindicativoUsuarioEstrangeiro"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ercodigoCargo")))
 			            	j1.put("CodigoCargo", entry.getString("ercodigoCargo"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ercodigoEmpresaContratante")))
 			            	j1.put("CodigoEmpresaContratante", entry.getString("ercodigoEmpresaContratante"));
-			            
-			            if (!util.isNullOrEmpty(entry.getString("ercodigoSetor")))
 			            	j1.put("CodigoSetor", entry.getString("ercodigoSetor"));
-			            
-			            jsonResult = sendPut("/alterausuario", j1.toString());
+							
+							jsonResult = sendPut("/alterausuario", j1.toString());
+						}
 					}
-					
 					if (jsonResult.has("Error")) {
 						throw new Exception(String.valueOf(jsonResult.getString("Error")));
 					}
@@ -703,10 +730,18 @@ public class ASConnector extends Connector implements ConnectorInterface {
 		}
 	}
 	
+	/**
+	 * Required for CallReply mode. It is called once on each AssemblyLine iteration when the Connector is used in CallReply mode
+	 */
 	public Entry queryReply(Entry entry) {
 		return null;
 	}
 	
+	/**
+	 * Metodo para obter o status no IGI
+	 * @return codigo do status
+	 * @param eruid: ID da conta (CPF)
+	 */
 	private String getStatus(String eruid) throws Exception {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -784,7 +819,9 @@ public class ASConnector extends Connector implements ConnectorInterface {
 			int responseCode = httpConn.getResponseCode();
 			Scanner s = new Scanner(responseStream).useDelimiter("\\A");
 			
-			if (responseCode != HttpURLConnection.HTTP_OK) {
+			if (responseCode >= 200 && responseCode <= 299) {
+				jsonResult.put("Success", "OK");
+			} else {
 				String error = s.hasNext() ? s.next() : "";
 				logerror(error);
 				
@@ -793,8 +830,6 @@ public class ASConnector extends Connector implements ConnectorInterface {
 				} else {
 					jsonResult.put("Error", error);
 				}
-			} else {
-				jsonResult.put("Success", "OK");
 			}
 		}
 		catch (Exception e) {
@@ -839,12 +874,12 @@ public class ASConnector extends Connector implements ConnectorInterface {
 			
 			loginfo("sendPut " + responseCode);
 			
-			if (responseCode != HttpURLConnection.HTTP_NO_CONTENT) {
+			if (responseCode >= 200 && responseCode <= 299) {
+				jsonResult.put("Success", "OK");
+			} else {
 				String error = s.hasNext() ? s.next() : "";
 				logerror(error);
 				jsonResult.put("Error", error);
-			} else {
-				jsonResult.put("Success", "OK");
 			}
 		}
 		catch (Exception e) {
@@ -876,7 +911,7 @@ public class ASConnector extends Connector implements ConnectorInterface {
 	        
 	        int responseCode = httpConn.getResponseCode();
 	        
-	        if (responseCode == HttpURLConnection.HTTP_OK) {
+	        if (responseCode >= 200 && responseCode <= 299) {
 	        	BufferedReader br = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));
                 StringBuilder sb = new StringBuilder();
                 String line;
@@ -884,8 +919,8 @@ public class ASConnector extends Connector implements ConnectorInterface {
                 while ((line = br.readLine()) != null) {
                     sb.append(line+"\n");
                 }
-                br.close();
                 
+                br.close();
                 jsonResult = new JSONArray(sb.toString());
 	        }
 		}
@@ -897,6 +932,42 @@ public class ASConnector extends Connector implements ConnectorInterface {
 	    }
 		
 		return jsonResult;
+	}
+	
+	/**
+	 * Metodo para verificar se a conta existe
+	 * @return JSONObject com os dados
+	 * @param context: contexto para busca
+	 * @param content: corpo da requisicao
+	 */
+	private boolean searchAccouunt(String context, String content) throws Exception {
+		JSONArray jsonResult = new JSONArray();
+		boolean exist = false;
+		
+		try {
+			URL u = new URL(url + context);
+			HttpURLConnection httpConn = (HttpURLConnection) u.openConnection();
+			httpConn.setRequestMethod("GET");
+			httpConn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+			httpConn.setRequestProperty("Accept", "application/json");
+			httpConn.setUseCaches(false);
+			httpConn.setAllowUserInteraction(false);
+			httpConn.connect();
+	        
+	        int responseCode = httpConn.getResponseCode();
+	        
+	        if (responseCode >= 200 && responseCode <= 299) {
+	        	exist = true;
+	        }
+		}
+		catch (Exception e) {
+			JSONObject tmp = new JSONObject();
+			jsonResult.put(tmp.put("Error", e.getMessage()));
+			
+			logerror("Exception searchAccouunt: " + ExceptionUtils.getStackTrace(e));
+	    }
+		
+		return exist;
 	}
 	
 	/**
@@ -940,6 +1011,10 @@ public class ASConnector extends Connector implements ConnectorInterface {
 		return token;
 	}
 	
+	/**
+	 * Metodo para obter o ID dos sistemas
+	 * Nao utilizado neste versao do conector
+	 */
 	@SuppressWarnings("unused")
 	private String[] getSistemas() throws Exception {
 		Connection conn = null;
@@ -979,6 +1054,9 @@ public class ASConnector extends Connector implements ConnectorInterface {
 		return array;
 	}
 	
+	/**
+	 * Metodo para testar conexao com o sistema
+	 */
 	private String testService() throws Exception {
 		String ret  = "site_up";
 		
@@ -1005,12 +1083,18 @@ public class ASConnector extends Connector implements ConnectorInterface {
 		return ret;
 	}
     
+	/**
+	 * Metodo para obter o ID dos sistemas
+	 * Nao utilizado neste versao do conector
+	 * @param path: caminho do arquivo
+	 */
 	private String[] readFile(String path) throws Exception {
 		String[] array = null;
 		
 		try {
 			if (path.equals("")) {
-				throw new Exception("Fail read file, path is null");
+				logerror("File reading failed, path is null, using path '/opt/IBM/TDI/V7.2/sistemas.txt'");
+				path = "/opt/IBM/TDI/V7.2/sistemas.txt";
             }
 			
 			List<String> listOfStrings = new ArrayList<String>();
