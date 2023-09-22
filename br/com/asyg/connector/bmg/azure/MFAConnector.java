@@ -22,6 +22,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import com.ibm.di.connector.Connector;
 import com.ibm.di.connector.ConnectorInterface;
 import com.ibm.di.entry.Entry;
@@ -37,11 +39,18 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	private String grantType, clientId, token, urlService, clientSecret, tenant, urlAuthentication, uid, operation, type;
 	private int current;
 	
+	/**
+	 * In the constructor you will usually set the name of your Connector (using the "setName(...)" 
+	 * method) and define what modes - Iterator, Lookup, AddOnly, Server, Delta etc
+	 */
 	public MFAConnector() {
 		setName("MFA Connector");
 		setModes(new String[] { "Iterator", "AddOnly", "Update", "Lookup", "Delete" });
 	}
 	
+	/**
+	 * Method is called by the AssemblyLine after it has finished cycling and before it terminates.
+	 */
 	public void terminate() throws Exception {
 		loginfo("Terminate MFA Connector");
 		
@@ -55,6 +64,11 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 		super.terminate();
 	}
 	
+	/**
+	 * This method is called by the AssemblyLine before it starts cycling. 
+	 * In general anybody who creates and uses a Connector programmatically should call "initialize(...)" 
+	 * after constructing the Connector and before calling any other method
+	 */
 	public void initialize(Object o) throws Exception {
 		loginfo("Initialize MFA Connector");
 		
@@ -89,6 +103,9 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 		return VERSION_INFO;
 	}
 	
+	/**
+	 * Required for Iterator mode. This method is called only when the Connector is used in Iterator mode, after it has been initialized
+	 */
 	public void selectEntries() throws Exception {
 		loginfo("Entering selectEntries() method");
 		JSONObject jsonResult = new JSONObject();
@@ -102,16 +119,19 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 					if (!type.equals("User"))
 						break;
 					
-					String[] ids = sendGetId();
+					JSONArray results = sendGetId();
 					
-					for (int i = 0; i < ids.length; i++) {
+					for (int i = 0; i < results.length(); i++) {
+						JSONObject rec = results.getJSONObject(i);
 						Account usr = new Account();
-						jsonResult = sendGet("/" + ids[i] + "/authentication/methods");
+						
+						usr.setMail(rec.getString("userPrincipalName"));
+						usr.setStatus(rec.getBoolean("accountEnabled") ? 0 : 1);
+						
+						jsonResult = sendGet("/" + rec.getString("userPrincipalName") + "/authentication/methods");
 						JSONArray jarr = jsonResult.getJSONArray("value");
 						
 						tmp = new JSONArray();
-						
-						usr.setMail(ids[i]);
 						
 						for (int j = 0; j < jarr.length(); j++) {
 							JSONObject arr = jarr.getJSONObject(j);
@@ -169,6 +189,10 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	    }
 	}
 	
+	/**
+	 * Required for Iterator mode. This is the method called on each AssemblyLine's iteration when the Connector is in Iterator mode.
+	 * It is expected to return a single Entry that feeds the rest of the AssemblyLine
+	 */
 	public synchronized Entry getNextEntry() throws Exception {
 		loginfo("Entering getNextEntry() method");
 		Entry entry = null;
@@ -186,7 +210,6 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 					}
 					
 					return entry;
-					
 				case "Methods":
 					if (!type.equals("Methods"))
 			            break;
@@ -198,7 +221,6 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 					}
 					
 					return entry;
-					
 				default:
 					logerror("Invalid entry type: " + type);
 					throw new Exception("Invalid entry type: " + type);
@@ -220,6 +242,7 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	    var1.setAttribute("eremail", var2.getMail());
 	    var1.setAttribute("erphonenumber", var2.getPhoneNumber());
 	    var1.setAttribute("ersmsstate", var2.getSmsSignInState());
+	    var1.setAttribute("eraccountStatus", var2.getStatus());
 	    
 	    JSONArray jsRoles = new JSONArray(var2.getRoleid());
 		
@@ -242,6 +265,10 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 		loginfo("querySchema");
 	}
 	
+	/**
+	 * Required for Lookup, Update and Delete modes. 
+	 * It is called once on each AssemblyLine iteration when the Connector performs a Lookup operation
+	 */
 	public Entry findEntry(SearchCriteria paramSearchCriteria) throws Exception {
 		loginfo("Entering findEntry() method");
 		loginfo("paramSearchCriteria " + paramSearchCriteria.toString());
@@ -265,13 +292,16 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 		return entry;
 	}
 	
+	/**
+	 * Required for Delete mode
+	 */
 	public void deleteEntry(Entry entry, SearchCriteria search) throws Exception {
 		loginfo("Entering deleteEntry() method");
 		JSONObject j1 = new JSONObject();
 		
 		try {
 			JSONObject jsonResult = sendGet("/" + entry.getString("eruid") + "/authentication/phoneMethods");
-
+			
 			if (!jsonResult.isEmpty()) {
 				JSONArray jarr = jsonResult.getJSONArray("value");
 				j1 = sendDelete("/" + entry.getString("eruid") + "/authentication/phoneMethods/" + jarr.getJSONObject(0).getString("id"));
@@ -287,14 +317,20 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	    }
 	}
 	
+	/**
+	 * Required for AddOnly and Update modes. It is called once on each AssemblyLine iteration when the Connector is used in AddOnly mode
+	 */
 	public void putEntry(Entry entry) throws Exception {
 		loginfo("Entering putEntry() method");
 		JSONObject j1 = new JSONObject();
 		String ret = "";
 		
 		try {
+			PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+			PhoneNumber swissNumberProto = phoneUtil.parse(entry.getString("erphoneNumber").toString(), "BR");
+			
 			j1.put("phoneType", "mobile");
-			j1.put("phoneNumber", "+55" + entry.getString("erphoneNumber").replaceAll("\\D+",""));
+			j1.put("phoneNumber", "+" + swissNumberProto.getCountryCode() + swissNumberProto.getNationalNumber());
 			JSONObject jsonResult = sendPost("/" + entry.getString("eremail") + "/authentication/phoneMethods", j1.toString());
 			
 			if (jsonResult.has("error")) {
@@ -307,6 +343,9 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	    }
 	}
 	
+	/**
+	 * Required for Update mode
+	 */
 	public void modEntry(Entry entry, SearchCriteria search, Entry old) throws Exception {
 		loginfo("modEntry " + operation + ", entry " + entry + ", old " + old);
 		JSONObject j1 = new JSONObject(), jsonResult = new JSONObject();
@@ -325,7 +364,9 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 					jsonResult = sendGet("/" + uid + "/authentication/phoneMethods");
 					
 					JSONArray jarr = jsonResult.getJSONArray("value");
-					j1 = sendDelete("/" + entry.getString("eruid") + "/authentication/phoneMethods/" + jarr.getJSONObject(0).getString("id"));
+					
+					if(jarr != null && jarr.length() > 0)
+						j1 = sendDelete("/" + entry.getString("eruid") + "/authentication/phoneMethods/" + jarr.getJSONObject(0).getString("id"));
 					
 					if (j1.has("Error")) {
 						throw new Exception(String.valueOf(j1.getString("Error")));
@@ -333,8 +374,11 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 						j1 = new JSONObject();
 						jsonResult = new JSONObject();
 						
+						PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+						PhoneNumber swissNumberProto = phoneUtil.parse(entry.getString("erphoneNumber").toString(), "BR");
+						
 						j1.put("phoneType", "mobile");
-						j1.put("phoneNumber", "+55" + entry.getString("phoneNumber").replaceAll("\\D+",""));
+						j1.put("phoneNumber", "+" + swissNumberProto.getCountryCode() + swissNumberProto.getNationalNumber());
 						jsonResult = sendPost("/" + uid + "/authentication/phoneMethods", j1.toString());
 						
 						if (jsonResult.has("error")) {
@@ -354,6 +398,9 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 		}
 	}
 	
+	/**
+	 * Required for CallReply mode. It is called once on each AssemblyLine iteration when the Connector is used in CallReply mode
+	 */
 	public Entry queryReply(Entry entry) {
 		return null;
 	}
@@ -373,9 +420,9 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	        	
 				int responseCode = response.getStatusLine().getStatusCode();
 				
-				loginfo("URL: " + var.getURI());
-				loginfo("Method: " + var.getMethod());
-				loginfo("Status line: " + response.getStatusLine().toString());
+				logdebug("URL: " + var.getURI());
+				logdebug("Method: " + var.getMethod());
+				logdebug("Status line: " + response.getStatusLine().toString());
 				
 				if (responseCode == 201) {
 					jsonResult.put("Success", EntityUtils.toString(response.getEntity()));
@@ -405,9 +452,9 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	        try (CloseableHttpClient httpClient = HttpClients.createDefault();
 		        	CloseableHttpResponse response = httpClient.execute(var)) {
 	        	
-	        	loginfo("URL: " + var.getURI());
-	        	loginfo("Method: " + var.getMethod());
-		    	loginfo("Status line: " + response.getStatusLine().toString());
+	        	logdebug("URL: " + var.getURI());
+	        	logdebug("Method: " + var.getMethod());
+	        	logdebug("Status line: " + response.getStatusLine().toString());
 				
 	        	int responseCode = response.getStatusLine().getStatusCode();
 	        	
@@ -438,9 +485,9 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	        	
 				int responseCode = response.getStatusLine().getStatusCode();
 				
-				loginfo("URL: " + var.getURI());
-				loginfo("Method: " + var.getMethod());
-		    	loginfo("Status line: " + response.getStatusLine().toString());
+				logdebug("URL: " + var.getURI());
+				logdebug("Method: " + var.getMethod());
+				logdebug("Status line: " + response.getStatusLine().toString());
 		    	
 		        if (responseCode == 204) {
 		        	jsonResult.put("success", "OK");
@@ -460,7 +507,7 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	private String getToken() {
 		String token = "";
 		
-		try {	    	
+		try {
 			HttpPost httpPost = new HttpPost(urlAuthentication + "/" + tenant + "/oauth2/v2.0/token");
 		    List<NameValuePair> params = new ArrayList<NameValuePair>();
 		    params.add(new BasicNameValuePair("grant_type", grantType));
@@ -474,9 +521,9 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 		    	
 		    	int responseCode = response.getStatusLine().getStatusCode();
 		    	
-		    	loginfo("URL: " + httpPost.getURI());
-		    	loginfo("Method: " + httpPost.getMethod());
-		    	loginfo("Status line: " + response.getStatusLine().toString());
+		    	logdebug("URL: " + httpPost.getURI());
+		    	logdebug("Method: " + httpPost.getMethod());
+		    	logdebug("Status line: " + response.getStatusLine().toString());
 				
 		    	if (responseCode == 200) {
 			    	JSONObject jsonResult = new JSONObject(EntityUtils.toString(response.getEntity()));
@@ -491,8 +538,9 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 		return token;
 	}
 	
-	private String[] sendGetId() throws Exception {
-		String[] array = null;
+	private JSONArray sendGetId() throws Exception {
+		JSONObject j1 = new JSONObject();
+		JSONArray items = new JSONArray();
 		
 		try {
 			HttpGet var = new HttpGet(urlService);
@@ -503,48 +551,42 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 	        try (CloseableHttpClient httpClient = HttpClients.createDefault();
 		        	CloseableHttpResponse response = httpClient.execute(var)) {
 	        	
-	        	loginfo("URL: " + var.getURI());
-	        	loginfo("Method: " + var.getMethod());
-		    	loginfo("Status line: " + response.getStatusLine().toString());
+	        	logdebug("URL: " + var.getURI());
+	        	logdebug("Method: " + var.getMethod());
+	        	logdebug("Status line: " + response.getStatusLine().toString());
 				
 	        	int responseCode = response.getStatusLine().getStatusCode();
-	        	List<String> listOfStrings = new ArrayList<String>();
 	        	
 	        	if (responseCode == 200) {
 	        		JSONObject jsonResult = new JSONObject(EntityUtils.toString(response.getEntity()));
 	        		JSONArray results = jsonResult.getJSONArray("value");
 	        		
-	        		for (int i = 0; i < results.length(); ++i) {
+	        		for (int i = 0; i < results.length(); i++) {
 	        			JSONObject rec = results.getJSONObject(i);
-	        			listOfStrings.add(rec.getString("userPrincipalName"));
+	        			j1 = new JSONObject();
+	        			j1.put("userPrincipalName", rec.getString("userPrincipalName"));
+						j1.put("accountEnabled", rec.getBoolean("accountEnabled"));
+						
+						items.put(j1);
 	        		}
-	        		
-	        		array = listOfStrings.toArray(new String[0]);
 				}
 			}
 		}
 		catch (Exception e) {
-			array = null;
+			items = new JSONArray();
 			logerror("Exception sendGetId: " + ExceptionUtils.getStackTrace(e));
 	    }
 		
-		return array;
+		return items;
 	}
 	
+	/**
+	 * Metodo para testar conexao com o sistema
+	 */
 	private String testService() throws Exception {
 		String ret  = "site_up";
 		
 		try {
-			loginfo("Test Service");
-			loginfo("type: " + type);
-			loginfo("urlService: " + urlService);
-			loginfo("urlAuthentication: " + urlAuthentication);
-			loginfo("clientSecret: *************");
-			loginfo("grantType: " + grantType);
-			loginfo("clientId: " + clientId);
-			loginfo("tenant: " + tenant);
-			loginfo("operation: " + operation);
-			
 			URL path = new URL(urlService);
 			HttpURLConnection conn = (HttpURLConnection) path.openConnection();
 			conn.setRequestMethod("GET");
@@ -575,7 +617,6 @@ public class MFAConnector extends Connector implements ConnectorInterface {
 		this.myLog.error(paramString);
 	}
 	
-	@SuppressWarnings("unused")
 	private void logdebug(String paramString) {
 		this.myLog.debug(paramString);
 	}
