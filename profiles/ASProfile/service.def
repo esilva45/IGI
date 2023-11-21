@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service erserviceproviderfactory="com.ibm.itim.remoteservices.provider.itdiprovider.ItdiServiceProviderFactory" name="ASProfile" xmlns:svc="urn:com:ibm:itim:service:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:ibm:itim:service:1 service.xsd ">
+   <type category="service" location="schema.dsml" name="erASService" profile="ASProfile">
+      <key>
+         <field>erservicename</field>
+      </key>
+      <form location="erASService.xml"/>
+   </type>
+   <type category="account" location="schema.dsml" name="erASAccount" profile="ASAccountProfile">
+      <key>
+         <field>eruid</field>
+      </key>
+      <form location="erASAccount.xml"/>
+   </type>
+   <operation cn="ASAddAccount">
+      <name>add</name>
+      <description>add operations are supported by AddAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="ASConnector">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="clientId" source="erclientId">Client ID</parameter>
+         <parameter name="clientSecret" source="erclientSecret">Client Secret</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <parameter name="filePath" source="erfilepath">File Path</parameter>
+         <dispatcherParameter name="poolID">
+            <default>ASConnector/$(SO!erurl)/$(SO!erclientId)/$(SO!erclientSecret)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erfilepath)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>ASAddAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="ASDeleteAccount">
+      <name>delete</name>
+      <description>operation delete supported by DeleteAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="delete">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="clientId" source="erclientId">Client ID</parameter>
+         <parameter name="clientSecret" source="erclientSecret">Client Secret</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <parameter name="filePath" source="erfilepath">File Path</parameter>
+         <dispatcherParameter name="poolID">
+            <default>delete/$(SO!erurl)/$(SO!erclientId)/$(SO!erclientSecret)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erfilepath)</default>
+         </dispatcherParameter>
+      </connector>
+      <connector name="lookup">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="clientId" source="erclientId">Client ID</parameter>
+         <parameter name="clientSecret" source="erclientSecret">Client Secret</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <parameter name="filePath" source="erfilepath">File Path</parameter>
+         <dispatcherParameter name="poolID">
+            <default>lookup/$(SO!erurl)/$(SO!erclientId)/$(SO!erclientSecret)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erfilepath)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>ASDeleteAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="ASModifyAccount">
+      <name>modify</name>
+      <name>suspend</name>
+      <name>restore</name>
+      <description>operation modify supported by ModifyAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <input name="ermatricula" source="ermatricula"/>
+      <input name="ernome" source="ernome"/>
+      <input name="eremail" source="eremail"/>
+      <input name="ernivelCargo" source="ernivelCargo"/>
+      <input name="ercargo" source="ercargo"/>
+      <input name="ercidade" source="ercidade"/>
+      <input name="ersetor" source="ersetor"/>
+      <input name="ercpfSuperior" source="ercpfSuperior"/>
+      <input name="erdtNascimento" source="erdtNascimento"/>
+      <input name="erdtAdmissao" source="erdtAdmissao"/>
+      <input name="erdtInclusao" source="erdtInclusao"/>
+      <input name="erdataExpiracao" source="erdataExpiracao"/>
+      <input name="erloginWindows" source="erloginWindows"/>
+      <input name="erindicativoUsuarioEstrangeiro" source="erindicativoUsuarioEstrangeiro"/>
+      <input name="ercodigoEmpresaContratante" source="ercodigoEmpresaContratante"/>
+      <input name="erempresaSeqLab" source="erempresaSeqLab"/>
+      <input name="ercargoSeqLab" source="ercargoSeqLab"/>
+      <input name="ersetorSeqLab" source="ersetorSeqLab"/>
+      <input name="ercentroCustoSeqLab" source="ercentroCustoSeqLab"/>
+      <input name="ercidadeSeqLab" source="ercidadeSeqLab"/>
+      <!--input name="ercodigoEmpresa" source="ercodigoEmpresa"/>
+      <input name="ercodigoCargo" source="ercodigoCargo"/>
+      <input name="ercodigoSetor" source="ercodigoSetor"/>
+      <input name="ercodigoCentroCusto" source="ercodigoCentroCusto"/-->
+      <input name="erempresaCNPJ" source="erempresaCNPJ"/>
+      <input name="erempresa" source="erempresa"/>
+      <connector name="ASConnector">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="clientId" source="erclientId">Client ID</parameter>
+         <parameter name="clientSecret" source="erclientSecret">Client Secret</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <parameter name="filePath" source="erfilepath">File Path</parameter>
+         <dispatcherParameter name="poolID">
+            <default>ASConnector/$(SO!erurl)/$(SO!erclientId)/$(SO!erclientSecret)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erfilepath)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="OperationType">   
+         <default>$(OO!operation)</default>
+      </dispatcherParameter>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>ASModifyAccount.xml</assemblyLine>
+   </operation>
+   <operation cn="ASSearch">
+      <name>search</name>
+      <name>searchData</name>
+      <description>search operations are supported by AddAssemblyLine</description>
+      <input name="eruid" source="eruid"/>
+      <connector name="Accounts">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="clientId" source="erclientId">Client ID</parameter>
+         <parameter name="clientSecret" source="erclientSecret">Client Secret</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <parameter name="filePath" source="erfilepath">File Path</parameter>
+         <dispatcherParameter name="poolID">
+            <default>Accounts/$(SO!erurl)/$(SO!erclientId)/$(SO!erclientSecret)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erfilepath)</default>
+         </dispatcherParameter>
+      </connector>
+      <connector name="Restrictive">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="clientId" source="erclientId">Client ID</parameter>
+         <parameter name="clientSecret" source="erclientSecret">Client Secret</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <parameter name="filePath" source="erfilepath">File Path</parameter>
+         <dispatcherParameter name="poolID">
+            <default>Restrictive/$(SO!erurl)/$(SO!erclientId)/$(SO!erclientSecret)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erfilepath)</default>
+         </dispatcherParameter>
+      </connector>
+      <connector name="Permissive">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="clientId" source="erclientId">Client ID</parameter>
+         <parameter name="clientSecret" source="erclientSecret">Client Secret</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <parameter name="filePath" source="erfilepath">File Path</parameter>
+         <dispatcherParameter name="poolID">
+            <default>Permissive/$(SO!erurl)/$(SO!erclientId)/$(SO!erclientSecret)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erfilepath)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>ASSearch.xml</assemblyLine>
+   </operation>
+   <operation cn="ASTestConnection">
+      <name>test</name>
+      <description/>
+      <connector name="ASConnector">
+         <parameter name="url" source="erurl">URL</parameter>
+         <parameter name="clientId" source="erclientId">Client ID</parameter>
+         <parameter name="clientSecret" source="erclientSecret">Client Secret</parameter>
+         <parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+         <parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+         <parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+         <parameter name="filePath" source="erfilepath">File Path</parameter>
+         <dispatcherParameter name="poolID">
+            <default>ASConnector/$(SO!erurl)/$(SO!erclientId)/$(SO!erclientSecret)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erfilepath)</default>
+         </dispatcherParameter>
+      </connector>
+      <dispatcherParameter name="DisableAlCachPerService">
+         <default>true</default>
+      </dispatcherParameter>
+      <assemblyLine>ASTestConnection.xml</assemblyLine>
+   </operation>
+   <properties>
+      <property name="AdapterCategory">
+         <value>Application</value>
+      </property>
+      <property name="ProfileVersion">
+         <value>1.0</value>
+      </property>
+      <property name="com.ibm.itim.remoteservices.ResourceProperties.PASSWORD_NOT_REQUIRED_ON_RESTORE">
+         <value>false</value>
+      </property>
+      <property name="com.ibm.itim.itdi.properties.RMI_URL" source="erITDIURL">
+         <value>rmi://localhost:1099/ITDIDispatcher</value>
+      </property>
+   </properties>
+   <AttributeMap>
+      <Attribute name="erLastAccessDate" profile="account" value="none"/>
+   </AttributeMap>
+   <ServiceGroups>
+      <GroupDefinition accountAttribute="erpermissiveId" className="erASPermissiveGroups" profileName="ASPermissiveGroups" rdnAttribute="erpermissiveId">
+         <AttributeMap>
+            <Attribute name="erGroupId" value="erpermissiveId"/>
+            <Attribute name="erGroupName" value="erpermissiveName"/>
+            <Attribute name="erGroupDescription" value="erpermissiveDescription"/>
+            <Attribute name="erpermissiveType" value="erpermissiveType"/>
+         </AttributeMap>
+         <properties>
+            <property name="Managed">
+               <value>true</value>
+            </property>
+         </properties>
+         <form location="erASPermissiveGroups.xml"/>
+      </GroupDefinition>
+      <GroupDefinition accountAttribute="errestrictiveId" className="erASRestrictiveGroups" profileName="ASRestrictiveGroups" rdnAttribute="errestrictiveId">
+         <AttributeMap>
+            <Attribute name="erGroupId" value="errestrictiveId"/>
+            <Attribute name="erGroupName" value="errestrictiveName"/>
+            <Attribute name="erGroupDescription" value="errestrictiveDescription"/>
+            <Attribute name="errestrictiveType" value="errestrictiveType"/>
+         </AttributeMap>
+         <properties>
+            <property name="Managed">
+               <value>true</value>
+            </property>
+         </properties>
+         <form location="erASRestrictiveGroups.xml"/>
+      </GroupDefinition>
+   </ServiceGroups>
+</Service>

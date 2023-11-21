@@ -1,0 +1,34 @@
+<page>
+	<body>
+		<form action="formvalidator0">
+			<formElement direction="inherit" isReadOnlyOnModify="true" label="$errestrictiveId" name="data.erRestrictiveId" required="true">
+				<input name="data.erRestrictiveId" size="250" type="text"/>
+				<constraint>
+					<type>REQUIRED</type>
+					<parameter>true</parameter>
+				</constraint>
+			</formElement>
+			<formElement direction="inherit" isReadOnlyOnModify="true" label="$errestrictiveName" name="data.erRestrictiveName" required="false">
+				<input name="data.erRestrictiveName" size="250" type="text"/>
+				<constraint>
+					<type>REQUIRED</type>
+					<parameter>false</parameter>
+				</constraint>
+			</formElement>
+			<formElement direction="inherit" isReadOnlyOnModify="true" label="$errestrictiveDescription" name="data.erRestrictiveDescription" required="false">
+				<input name="data.erRestrictiveDescription" size="250" type="text"/>
+				<constraint>
+					<type>REQUIRED</type>
+					<parameter>false</parameter>
+				</constraint>
+			</formElement>
+			<formElement direction="inherit" isReadOnlyOnModify="true" label="$errestrictiveType" name="data.erRestrictiveType" required="false">
+				<input name="data.erRestrictiveType" size="250" type="text"/>
+				<constraint>
+					<type>REQUIRED</type>
+					<parameter>false</parameter>
+				</constraint>
+			</formElement>
+		</form>
+	</body>
+</page>
