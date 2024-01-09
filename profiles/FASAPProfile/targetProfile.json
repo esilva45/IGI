@@ -1,0 +1,834 @@
+{
+  "name" : "FASAPProfile",
+  "description" : "FASAPProfile profile definition",
+  "providerType" : "SDI",
+  "providerConfig" : {
+    "changePassword" : true
+  },
+  "resourceTypes" : [ {
+    "schemas" : [ "urn:ietf:params:scim:schemas:core:2.0:ResourceType" ],
+    "id" : "FASAPProfileUser",
+    "name" : "User",
+    "endpoint" : "Users",
+    "description" : "FASAPProfile User",
+    "schema" : "urn:ietf:params:scim:schemas:core:2.0:User",
+    "schemaExtensions" : [ {
+      "schema" : "urn:ibm:idbrokerage:params:scim:schemas:extension:FASAPAccount:2.0:User",
+      "required" : false
+    } ],
+    "meta" : {
+      "location" : "/v2/ResourceTypes/Users",
+      "resourceType" : "ResourceType"
+    }
+  }, {
+    "schemas" : [ "urn:ietf:params:scim:schemas:core:2.0:ResourceType" ],
+    "id" : "FASAPProfileGroup",
+    "name" : "Group",
+    "endpoint" : "Groups",
+    "description" : "FASAPProfile Group",
+    "schema" : "urn:ietf:params:scim:schemas:core:2.0:Group",
+    "schemaExtensions" : [ ],
+    "meta" : {
+      "location" : "/v2/ResourceTypes/Groups",
+      "resourceType" : "ResourceType"
+    }
+  }, {
+    "schemas" : [ "urn:ietf:params:scim:schemas:core:2.0:ResourceType" ],
+    "id" : "FASAPProfileTarget",
+    "name" : "Target",
+    "endpoint" : "Targets",
+    "description" : "FASAPProfile Target",
+    "schema" : "urn:ibm:idbrokerage:params:scim:schemas:FASAPProfile:2.0:Target",
+    "schemaExtensions" : [ ],
+    "meta" : {
+      "location" : "/v2/ResourceTypes/Targets",
+      "resourceType" : "ResourceType"
+    }
+  } ],
+  "userExtension" : {
+    "schema" : "urn:ibm:idbrokerage:params:scim:schemas:extension:FASAPAccount:2.0:User",
+    "definition" : {
+      "id" : "urn:ibm:idbrokerage:params:scim:schemas:extension:FASAPAccount:2.0:User",
+      "name" : "CustomUserExtension",
+      "description" : "Security adapter view of a user",
+      "attributes" : [ {
+        "name" : "erUid",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "An identifier used to uniquely identify a user",
+        "required" : true,
+        "mutability" : "immutable",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "server"
+      }, {
+        "name" : "erstatus",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Status",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erMatricula",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Matricula",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erLogin",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Login",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erFirstName",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Primeiro Nome",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erLastName",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Segundo Nome",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erPreferedName",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Nome Preferido",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erGender",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Genero",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtIniPerpersonal",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Inicio Personal",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtFimPerpersonal",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Fim Personal",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtUltModEmpjob",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Ultima Modificacao Empjob",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erCpf",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Numero CPF",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtNasc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Nascimento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erRgNum",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Numero RG",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtEmissaoDoc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Emissao Documento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtValidadeDoc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Validade Documento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erStatusColaborador",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Estado Colaborador",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtIniEmpjob",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Inicio",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtFimEmpjob",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Fim",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erMotivoEvento",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Motivo Evento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtIniItrOrg",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Inicio Org",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtFimAtrOrg",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Fim Org",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erEmpresa",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Empresa",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erEmpresaDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao da Empresa",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erEstabelecimento",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Estabelecimento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erEstabelecimentoDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao do Estabelecimento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDepartamento",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Departamento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDepartamentoDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao do Departamento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erCargo",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Cargo",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erCargoDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao do Cargo",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erGrupoEmpregado",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Grupo Empregado",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erSubGrupoEmpregado",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Sub Grupo Empregado",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erCentroCusto",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Centro Custo",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erMatriculaGestor",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Matricula Gestor",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtUltModAtrOrg",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Ultima Modificacao AtrOrg",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erStatusColaboradorDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao do Estado Colaborador",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erMotivoEventoDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao do Motivo Evento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erGrupoEmpregadoDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao do Grupo Empregado",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erSubGrupoEmpregadoDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao do Sub Grupo Empregado",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erCentroCustoDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao do Centro Custo",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erTipoAfastamento",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Tipo Afastamento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDiasAfastamento",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Dias Afastamento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtIniAfast",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Inicio Afastamento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtFimAfast",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Fim Afastamento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erTipoAfastamentoDesc",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Descricao do Tipo Afastamento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erDtUltModAfast",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Data Ultima Modificacao Afastamento",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erCustStatus",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Estado Customizado",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erPhoneNumber",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Numero Telefone",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erNivelCargo",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Nivel Cargo",
+        "required" : false,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      } ]
+    },
+    "attributeMapping" : {
+      "objectProfile" : "FASAPAccount",
+      "resourceType" : "User",
+      "commonAttributes" : {
+        "externalId" : "",
+        "meta" : {
+          "created" : "",
+          "lastModified" : ""
+        }
+      },
+      "coreAttributes" : {
+        "userName" : "eruid",
+        "password" : "erpassword",
+        "active" : "eraccountstatus",
+        "name" : {
+          "formatted" : "",
+          "familyName" : "",
+          "givenName" : "",
+          "middleName" : "",
+          "honorificPrefix" : "",
+          "honorificSuffix" : ""
+        },
+        "displayName" : "",
+        "nickName" : "",
+        "profileUrl" : "",
+        "title" : "",
+        "userType" : "",
+        "preferredLanguage" : "",
+        "locale" : "",
+        "timezone" : "",
+        "emails" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "phoneNumbers" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "ims" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "photos" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "addresses" : [ {
+          "formatted" : [ ],
+          "streetAddress" : [ ],
+          "locality" : "",
+          "region" : "",
+          "postalCode" : "",
+          "country" : "",
+          "type" : ""
+        } ],
+        "entitlements" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "roles" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "x509Certificates" : [ {
+          "value" : "",
+          "display" : "",
+          "primary" : "",
+          "type" : ""
+        } ],
+        "groups" : [ ]
+      },
+      "enterpriseExtensionAttributes" : {
+        "employeeNumber" : "",
+        "costCenter" : "",
+        "organization" : "",
+        "division" : "",
+        "department" : "",
+        "manager" : {
+          "value" : "",
+          "displayname" : ""
+        }
+      }
+    }
+  },
+  "groupExtensions" : [ ],
+  "targetSchema" : {
+    "schema" : "urn:ibm:idbrokerage:params:scim:schemas:FASAPProfile:2.0:Target",
+    "definition" : {
+      "name" : "Target definition",
+      "id" : "urn:ibm:idbrokerage:params:scim:schemas:FASAPProfile:2.0:Target",
+      "description" : "FASAPProfile Target definition",
+      "attributes" : [ {
+        "name" : "erservicename",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "name for this target",
+        "required" : true,
+        "caseExact" : false,
+        "mutability" : "readWrite",
+        "returned" : "always",
+        "uniqueness" : "none",
+        "specialFlags" : "none"
+      }, {
+        "name" : "eritdiurl",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "URL of SDI dispatcher",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erURL",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "erURL",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erclientId",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "ID Cliente",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "eruserId",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Usuario",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "ergrantType",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Tipo de Concessao",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erprivatekey",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Caminho da Chave Privada",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "ercompanyId",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "ID da Companhia",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erjdbcurl",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "JDBC URL",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erjdbcuser",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Usuario JDBC",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erjdbcpassword",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Senha JDBC",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      }, {
+        "name" : "erprintMsg",
+        "type" : "string",
+        "multiValued" : false,
+        "description" : "Mensagens de debug",
+        "required" : true,
+        "mutability" : "readWrite",
+        "caseExact" : false,
+        "returned" : "default",
+        "specialFlags" : "none",
+        "uniqueness" : "none"
+      } ]
+    }
+  },
+  "supportingDataAttributeMapping" : [ ]
+}

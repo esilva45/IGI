@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dsml>
+	<directory-schema>
+		<attribute-type single-value="true">
+			<name>eruid</name>
+			<description>UID</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.1</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erstatus</name>
+			<description>Status</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.2</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erurl</name>
+			<description>URL do Servico</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.3</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erclientId</name>
+			<description>ID Cliente</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.4</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>eruserId</name>
+			<description>Usuario</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.5</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>ergrantType</name>
+			<description>Tipo de Concessao</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.6</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erprivatekey</name>
+			<description>Caminho da Chave Privada</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.7</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>ercompanyId</name>
+			<description>ID da Companhia</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.8</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erjdbcurl</name>
+			<description>JDBC URL</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.9</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erjdbcpassword</name>
+			<description>Senha JDBC</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.10</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erjdbcuser</name>
+			<description>Usuario JDBC</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.11</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erMatricula</name>
+			<description>Matricula</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.12</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erLogin</name>
+			<description>Login</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.13</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erFirstName</name>
+			<description>Primeiro Nome</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.14</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erLastName</name>
+			<description>Segundo Nome</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.15</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erPreferedName</name>
+			<description>Nome Preferido</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.16</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erGender</name>
+			<description>Genero</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.17</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtIniPerpersonal</name>
+			<description>Data Inicio Personal</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.18</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtFimPerpersonal</name>
+			<description>Data Fim Personal</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.19</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtUltModEmpjob</name>
+			<description>Data Ultima Modificacao Empjob</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.20</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erCpf</name>
+			<description>Numero CPF</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.21</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtNasc</name>
+			<description>Data Nascimento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.22</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erRgNum</name>
+			<description>Numero RG</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.23</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtEmissaoDoc</name>
+			<description>Data Emissao Documento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.24</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtValidadeDoc</name>
+			<description>Data Validade Documento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.25</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erStatusColaborador</name>
+			<description>Estado Colaborador</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.26</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtIniEmpjob</name>
+			<description>Data Inicio</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.27</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtFimEmpjob</name>
+			<description>Data Fim</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.28</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erMotivoEvento</name>
+			<description>Motivo Evento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.29</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtIniItrOrg</name>
+			<description>Data Inicio Org</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.30</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtFimAtrOrg</name>
+			<description>Data Fim Org</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.31</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erEmpresa</name>
+			<description>Empresa</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.32</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erEmpresaDesc</name>
+			<description>Descricao da Empresa</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.33</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erEstabelecimento</name>
+			<description>Estabelecimento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.34</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erEstabelecimentoDesc</name>
+			<description>Descricao do Estabelecimento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.35</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDepartamento</name>
+			<description>Departamento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.36</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDepartamentoDesc</name>
+			<description>Descricao do Departamento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.37</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erCargo</name>
+			<description>Cargo</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.38</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erCargoDesc</name>
+			<description>Descricao do Cargo</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.39</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erGrupoEmpregado</name>
+			<description>Grupo Empregado</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.40</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erSubGrupoEmpregado</name>
+			<description>Sub Grupo Empregado</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.41</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erCentroCusto</name>
+			<description>Centro Custo</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.42</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erMatriculaGestor</name>
+			<description>Matricula Gestor</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.43</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtUltModAtrOrg</name>
+			<description>Data Ultima Modificacao AtrOrg</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.44</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erStatusColaboradorDesc</name>
+			<description>Descricao do Estado Colaborador</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.45</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erMotivoEventoDesc</name>
+			<description>Descricao do Motivo Evento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.46</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erGrupoEmpregadoDesc</name>
+			<description>Descricao do Grupo Empregado</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.47</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erSubGrupoEmpregadoDesc</name>
+			<description>Descricao do Sub Grupo Empregado</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.48</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erCentroCustoDesc</name>
+			<description>Descricao do Centro Custo</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.49</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erTipoAfastamento</name>
+			<description>Tipo Afastamento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.50</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDiasAfastamento</name>
+			<description>Dias Afastamento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.51</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtIniAfast</name>
+			<description>Data Inicio Afastamento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.52</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtFimAfast</name>
+			<description>Data Fim Afastamento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.53</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erTipoAfastamentoDesc</name>
+			<description>Descricao do Tipo Afastamento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.54</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erDtUltModAfast</name>
+			<description>Data Ultima Modificacao Afastamento</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.55</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erCustStatus</name>
+			<description>Estado Customizado</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.56</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erNivelCargo</name>
+			<description>Nivel Cargo</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.57</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erPhoneNumber</name>
+			<description>Numero Telefone</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.58</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<attribute-type single-value="true">
+			<name>erprintMsg</name>
+			<description>Mensagens de debug</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.2.59</object-identifier>
+			<syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+		</attribute-type>
+		<!-- ******************************************************** -->
+		<!-- erFASAPAccount class -->
+		<!-- ******************************************************** -->
+		<class superior="top">
+			<name>erFASAPAccount</name>
+			<description>FASAP account class</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.1.1</object-identifier>
+			<attribute ref="eruid" required="true"/>
+			<attribute ref="erstatus" required="false"/>
+			<attribute ref="erMatricula" required="false"/>
+			<attribute ref="erLogin" required="false"/>
+			<attribute ref="erFirstName" required="false"/>
+			<attribute ref="erLastName" required="false"/>
+			<attribute ref="erPreferedName" required="false"/>
+			<attribute ref="erGender" required="false"/>
+			<attribute ref="erDtIniPerpersonal" required="false"/>
+			<attribute ref="erDtFimPerpersonal" required="false"/>
+			<attribute ref="erDtUltModEmpjob" required="false"/>
+			<attribute ref="erCpf" required="false"/>
+			<attribute ref="erDtNasc" required="false"/>
+			<attribute ref="erRgNum" required="false"/>
+			<attribute ref="erDtEmissaoDoc" required="false"/>
+			<attribute ref="erDtValidadeDoc" required="false"/>
+			<attribute ref="erStatusColaborador" required="false"/>
+			<attribute ref="erDtIniEmpjob" required="false"/>
+			<attribute ref="erDtFimEmpjob" required="false"/>
+			<attribute ref="erMotivoEvento" required="false"/>
+			<attribute ref="erDtIniItrOrg" required="false"/>
+			<attribute ref="erDtFimAtrOrg" required="false"/>
+			<attribute ref="erEmpresa" required="false"/>
+			<attribute ref="erEmpresaDesc" required="false"/>
+			<attribute ref="erEstabelecimento" required="false"/>
+			<attribute ref="erEstabelecimentoDesc" required="false"/>
+			<attribute ref="erDepartamento" required="false"/>
+			<attribute ref="erDepartamentoDesc" required="false"/>
+			<attribute ref="erCargo" required="false"/>
+			<attribute ref="erCargoDesc" required="false"/>
+			<attribute ref="erGrupoEmpregado" required="false"/>
+			<attribute ref="erSubGrupoEmpregado" required="false"/>
+			<attribute ref="erCentroCusto" required="false"/>
+			<attribute ref="erMatriculaGestor" required="false"/>
+			<attribute ref="erDtUltModAtrOrg" required="false"/>
+			<attribute ref="erStatusColaboradorDesc" required="false"/>
+			<attribute ref="erMotivoEventoDesc" required="false"/>
+			<attribute ref="erGrupoEmpregadoDesc" required="false"/>
+			<attribute ref="erSubGrupoEmpregadoDesc" required="false"/>
+			<attribute ref="erCentroCustoDesc" required="false"/>
+			<attribute ref="erTipoAfastamento" required="false"/>
+			<attribute ref="erDiasAfastamento" required="false"/>
+			<attribute ref="erDtIniAfast" required="false"/>
+			<attribute ref="erDtFimAfast" required="false"/>
+			<attribute ref="erTipoAfastamentoDesc" required="false"/>
+			<attribute ref="erDtUltModAfast" required="false"/>
+			<attribute ref="erCustStatus" required="false"/>
+			<attribute ref="erPhoneNumber" required="false"/>
+			<attribute ref="erNivelCargo" required="false"/>
+		</class>
+		<!-- ******************************************************** -->
+		<!-- erFASAPService class -->
+		<!-- ******************************************************** -->
+		<class superior="top">
+			<name>erFASAPService</name>
+			<description>class representing a  a RMI service provider</description>
+			<object-identifier>1.3.6.1.4.1.6054.3.468.1.2</object-identifier>
+			<attribute ref="eritdiurl" required="true"/>
+			<attribute ref="erurl" required="true"/>
+			<attribute ref="erclientId" required="true"/>
+			<attribute ref="eruserId" required="true"/>
+			<attribute ref="ergrantType" required="true"/>
+			<attribute ref="erprivatekey" required="true"/>
+			<attribute ref="ercompanyId" required="true"/>
+			<attribute ref="erjdbcurl" required="true"/>
+			<attribute ref="erjdbcuser" required="true"/>
+			<attribute ref="erjdbcpassword" required="true"/>
+			<attribute ref="erprintMsg" required="true"/>
+		</class>
+	</directory-schema>
+</dsml>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Service erserviceproviderfactory="com.ibm.itim.remoteservices.provider.itdiprovider.ItdiServiceProviderFactory" name="FASAPProfile" xmlns:svc="urn:com:ibm:itim:service:1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:ibm:itim:service:1 service.xsd ">
+	<type category="service" location="schema.dsml" name="erFASAPService" profile="FASAPProfile">
+		<key>
+			<field>erservicename</field>
+		</key>
+		<form location="erFASAPService.xml"/>
+	</type>
+	<type category="account" location="schema.dsml" name="erFASAPAccount" profile="FASAPAccount">
+		<key>
+			<field>eruid</field>
+		</key>
+		<form location="erFASAPAccount.xml"/>
+	</type>
+	<operation cn="FASAPTestConnection">
+		<name>test</name>
+		<description>Test operation is supported by this AL</description>
+		<input name="eruid" source="eruid"/>
+		<connector name="FASAPConnector">
+			<parameter name="url" source="erurl">URL</parameter>
+			<parameter name="clientId" source="erclientId">Client ID</parameter>
+			<parameter name="userId" source="eruserId">User ID</parameter>
+			<parameter name="grantType" source="ergrantType">Grant Type</parameter>
+			<parameter name="privatekey" source="erprivatekey">Private key</parameter>
+			<parameter name="companyId" source="ercompanyId">Company ID</parameter>
+			<parameter name="printMsg" source="erprintMsg">Print Message</parameter>
+			<parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+			<parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+			<parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+			<dispatcherParameter name="poolID">
+				<default>FASAPConnector/$(SO!erurl)/$(SO!erclientId)/$(SO!eruserId)/$(SO!ergrantType)/$(SO!erprivatekey)/$(SO!ercompanyId)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erprintMsg)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>FASAPTestConnection.xml</assemblyLine>
+	</operation>
+	<operation cn="FASAPSearchUser">
+		<name>search</name>
+		<description>Search operation is supported with this AL</description>
+		<input name="eruid" source="eruid"/>
+		<connector name="FASAPConnector">
+			<parameter name="url" source="erurl">URL</parameter>
+			<parameter name="clientId" source="erclientId">Client ID</parameter>
+			<parameter name="userId" source="eruserId">User ID</parameter>
+			<parameter name="grantType" source="ergrantType">Grant Type</parameter>
+			<parameter name="privatekey" source="erprivatekey">Private key</parameter>
+			<parameter name="companyId" source="ercompanyId">Company ID</parameter>
+			<parameter name="printMsg" source="erprintMsg">Print Message</parameter>
+			<parameter name="jdbcurl" source="erjdbcurl">JDBC URL</parameter>
+			<parameter name="jdbcuser" source="erjdbcuser">JDBC User</parameter>
+			<parameter name="jdbcpassword" source="erjdbcpassword">JDBC Password</parameter>
+			<dispatcherParameter name="poolID">
+				<default>FASAPConnector/$(SO!erurl)/$(SO!erclientId)/$(SO!eruserId)/$(SO!ergrantType)/$(SO!erprivatekey)/$(SO!ercompanyId)/$(SO!erjdbcurl)/$(SO!erjdbcuser)/$(SO!erjdbcpassword)/$(SO!erprintMsg)</default>
+			</dispatcherParameter>
+		</connector>
+		<dispatcherParameter name="DisableAlCachPerService">
+			<default>true</default>
+		</dispatcherParameter>
+		<assemblyLine>FASAPSearchUser.xml</assemblyLine>
+	</operation>
+	<properties>
+		<property name="com.ibm.itim.itdi.properties.RMI_URL" source="erITDIURL">
+			<value>rmi://localhost:1099</value>
+		</property>
+		<property name="com.ibm.itim.remoteservices.ResourceProperties.HRFEED">
+			<value>true</value>
+        </property>
+		<property name="AdapterCategory">
+			<value>System</value>
+		</property>
+		<property name="ProfileVersion">
+         	<value>1.0</value>
+      	</property>
+		<property name="HR_Target">
+			<value>true</value>
+		</property>
+	</properties>
+	<AttributeMap>
+		<Attribute name="erLastAccessDate" profile="account" value="none"/>
+	</AttributeMap>
+</Service>

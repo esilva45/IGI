@@ -1,0 +1,162 @@
+<page>
+	<body>
+		<tabbedForm>
+			<tab index="0" selected="true">
+				<title>$FASAPProfile</title>
+				<image/>
+				<url>javascript:switchTabs(document.forms['body'],0);</url>
+				<formElement direction="inherit" label="$eruid" name="data.eruid" required="true">
+					<input name="data.eruid" type="text"/>
+					<constraint>
+						<type>required</type>
+						<parameter>true</parameter>
+					</constraint>
+				</formElement>
+				<formElement label="$erstatus" name="data.erstatus">
+					<input name="data.erstatus" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erMatricula" name="data.erMatricula">
+					<input name="data.erMatricula" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erLogin" name="data.erLogin">
+					<input name="data.erLogin" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erFirstName" name="data.erFirstName">
+					<input name="data.erFirstName" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erLastName" name="data.erLastName">
+					<input name="data.erLastName" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erPreferedName" name="data.erPreferedName">
+					<input name="data.erPreferedName" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erGender" name="data.erGender">
+					<input name="data.erGender" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtIniPerpersonal" name="data.erDtIniPerpersonal">
+					<input name="data.erDtIniPerpersonal" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtFimPerpersonal" name="data.erDtFimPerpersonal">
+					<input name="data.erDtFimPerpersonal" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtUltModEmpjob" name="data.erDtUltModEmpjob">
+					<input name="data.erDtUltModEmpjob" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erCpf" name="data.erCpf">
+					<input name="data.erCpf" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtNasc" name="data.erDtNasc">
+					<input name="data.erDtNasc" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erRgNum" name="data.erRgNum">
+					<input name="data.erRgNum" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtEmissaoDoc" name="data.erDtEmissaoDoc">
+					<input name="data.erDtEmissaoDoc" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtValidadeDoc" name="data.erDtValidadeDoc">
+					<input name="data.erDtValidadeDoc" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erStatusColaborador" name="data.erStatusColaborador">
+					<input name="data.erStatusColaborador" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtIniEmpjob" name="data.erDtIniEmpjob">
+					<input name="data.erDtIniEmpjob" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtFimEmpjob" name="data.erDtFimEmpjob">
+					<input name="data.erDtFimEmpjob" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erMotivoEvento" name="data.erMotivoEvento">
+					<input name="data.erMotivoEvento" size="150" type="text"/>
+				</formElement>
+				<formElement label="$erDtIniItrOrg" name="data.erDtIniItrOrg">
+					<input name="data.erDtIniItrOrg" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtFimAtrOrg" name="data.erDtFimAtrOrg">
+					<input name="data.erDtFimAtrOrg" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erEmpresa" name="data.erEmpresa">
+					<input name="data.erEmpresa" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erEmpresaDesc" name="data.erEmpresaDesc">
+					<input name="data.erEmpresaDesc" size="150" type="text"/>
+				</formElement>
+				<formElement label="$erEstabelecimento" name="data.erEstabelecimento">
+					<input name="data.erEstabelecimento" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erEstabelecimentoDesc" name="data.erEstabelecimentoDesc">
+					<input name="data.erEstabelecimentoDesc" size="150" type="text"/>
+				</formElement>
+				<formElement label="$erDepartamento" name="data.erDepartamento">
+					<input name="data.erDepartamento" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDepartamentoDesc" name="data.erDepartamentoDesc">
+					<input name="data.erDepartamentoDesc" size="150" type="text"/>
+				</formElement>
+				<formElement label="$erCargo" name="data.erCargo">
+					<input name="data.erCargo" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erCargoDesc" name="data.erCargoDesc">
+					<input name="data.erCargoDesc" size="150" type="text"/>
+				</formElement>
+				<formElement label="$erGrupoEmpregado" name="data.erGrupoEmpregado">
+					<input name="data.erGrupoEmpregado" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erSubGrupoEmpregado" name="data.erSubGrupoEmpregado">
+					<input name="data.erSubGrupoEmpregado" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erCentroCusto" name="data.erCentroCusto">
+					<input name="data.erCentroCusto" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erMatriculaGestor" name="data.erMatriculaGestor">
+					<input name="data.erMatriculaGestor" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtUltModAtrOrg" name="data.erDtUltModAtrOrg">
+					<input name="data.erDtUltModAtrOrg" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erStatusColaboradorDesc" name="data.erStatusColaboradorDesc">
+					<input name="data.erStatusColaboradorDesc" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erMotivoEventoDesc" name="data.erMotivoEventoDesc">
+					<input name="data.erMotivoEventoDesc" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erGrupoEmpregadoDesc" name="data.erGrupoEmpregadoDesc">
+					<input name="data.erGrupoEmpregadoDesc" size="150" type="text"/>
+				</formElement>
+				<formElement label="$erSubGrupoEmpregadoDesc" name="data.erSubGrupoEmpregadoDesc">
+					<input name="data.erSubGrupoEmpregadoDesc" size="150" type="text"/>
+				</formElement>
+				<formElement label="$erCentroCustoDesc" name="data.erCentroCustoDesc">
+					<input name="data.erCentroCustoDesc" size="150" type="text"/>
+				</formElement>
+				<formElement label="$erTipoAfastamento" name="data.erTipoAfastamento">
+					<input name="data.erTipoAfastamento" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDiasAfastamento" name="data.erDiasAfastamento">
+					<input name="data.erDiasAfastamento" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtIniAfast" name="data.erDtIniAfast">
+					<input name="data.erDtIniAfast" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erDtFimAfast" name="data.erDtFimAfast">
+					<input name="data.erDtFimAfast" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erTipoAfastamentoDesc" name="data.erTipoAfastamentoDesc">
+					<input name="data.erTipoAfastamentoDesc" size="150" type="text"/>
+				</formElement>
+				<formElement label="$erDtUltModAfast" name="data.erDtUltModAfast">
+					<input name="data.erDtUltModAfast" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erCustStatus" name="data.erCustStatus">
+					<input name="data.erCustStatus" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erPhoneNumber" name="data.erPhoneNumber">
+					<input name="data.erPhoneNumber" size="50" type="text"/>
+				</formElement>
+				<formElement label="$erNivelCargo" name="data.erNivelCargo">
+					<input name="data.erNivelCargo" size="50" type="text"/>
+				</formElement>
+			</tab>
+		</tabbedForm>
+	</body>
+</page>

@@ -1,0 +1,30 @@
+Account|erFASAPAccount|HR
+PM_CODE=erCpf
+C_MATRICULA=erMatricula
+GIVEN_NAME=erFirstName
+SURNAME=erLastName
+GENDER=erGender
+C_CPF=erCpf
+C_PRIMARY_KEY=erCpf
+BIRTHDAY=erDtNasc
+C_DATA_INI_ATR_ORG=erDtIniItrOrg
+C_EMPRESA=erEmpresa
+C_EMPRESA_DESC=erEmpresaDesc
+C_ESTABELECIMENTO=erEstabelecimento
+C_ESTABELECIMENTO_DESC=erEstabelecimentoDesc
+C_DEPARTAMENTO=erDepartamento
+C_DEPARTAMENTO_DESC=erDepartamentoDesc
+C_CARGO=erCargo
+C_CARGO_DESC=erCargoDesc
+C_CENTRO_DE_CUSTO=erCentroCusto
+C_MOTIVO_EVENTO_DES=erMotivoEventoDesc
+C_CENTRO_DE_CUSTO_DESC=erCentroCustoDesc
+C_DATA_AFASTAMENTO_INI=erDtIniAfast
+C_DATA_AFASTAMENTO_FIM=erDtFimAfast
+PHONE_NUMBER=erPhoneNumber
+C_NIVEL_CARGO=erNivelCargo
+
+[conversion.date].erDtNasc.BIRTHDAY=[MM/dd/yyyy=dd/MM/yyyy HH:mm:ss]
+[conversion.date].erDtIniAfast.C_DATA_AFASTAMENTO_INI=[MM/dd/yyyy=dd/MM/yyyy HH:mm:ss]
+[conversion.date].erDtFimAfast.C_DATA_AFASTAMENTO_FIM=[MM/dd/yyyy=dd/MM/yyyy HH:mm:ss]
+[conversion.date].erDtIniItrOrg.C_DATA_INI_ATR_ORG=[MM/dd/yyyy=dd/MM/yyyy HH:mm:ss]

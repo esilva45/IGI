@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page>
+   <body>
+      <tabbedForm>
+         <tab index="0" selected="true">
+            <title>$FASAPProfileDesc</title>
+            <url>javascript:switchTabs(document.forms['body'],0);</url>
+            <formElement direction="inherit" label="$erservicename" name="data.erservicename">
+               <input name="data.erservicename" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$eritdiurl" name="data.eritdiurl" required="true">
+               <input name="data.eritdiurl" type="text" value="rmi://localhost:1099/ITDIDispatcher"/>
+            </formElement>
+            <formElement direction="inherit" label="$erurl" name="data.erurl" required="true">
+               <input name="data.erurl" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$eruserId" name="data.eruserId" required="true">
+               <input name="data.eruserId" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erclientId" name="data.erclientId" required="true">
+               <input name="data.erclientId" type="password"/>
+            </formElement>
+            <formElement direction="inherit" label="$ergrantType" name="data.ergrantType" required="true">
+               <input name="data.ergrantType" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erprivatekey" name="data.erprivatekey" required="true">
+               <input name="data.erprivatekey" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$ercompanyId" name="data.ercompanyId" required="true">
+               <input name="data.ercompanyId" type="text"/>
+            </formElement>
+            <formElement direction="inherit" name="data.erprintMsg" label="$erprintMsg" required="true">
+               <select width="300" style="width:300px" name="data.erprintMsg">
+                  <option value=" ">$erprintMsg_select</option>
+                  <option value="S">DEBUG</option>
+                  <option value="N">INFO</option>
+               </select>
+               <constraint>
+                  <type>REQUIRED</type>
+                  <parameter>true</parameter>
+               </constraint>
+            </formElement>
+         </tab>
+         <tab index="1" selected="false">
+            <title>$DBConnection</title>
+            <url>javascript:switchTabs(document.forms['body'],1);</url>
+            <formElement direction="inherit" label="$erjdbcurl" name="data.erjdbcurl" required="true">
+               <input name="data.erjdbcurl" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erjdbcuser" name="data.erjdbcuser" required="true">
+               <input name="data.erjdbcuser" type="text"/>
+            </formElement>
+            <formElement direction="inherit" label="$erjdbcpassword" name="data.erjdbcpassword" required="true">
+               <input name="data.erjdbcpassword" type="password"/>
+            </formElement>
+         </tab>
+      </tabbedForm>
+   </body>
+</page>
