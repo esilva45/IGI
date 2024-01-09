@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsml>
+  <directory-schema>
+    <attribute-type single-value="true">
+      <name>eruid</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.1</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>eraccountStatus</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.2</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>ername</name>
+      <description>Nome do usuario</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.3</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>eremail</name>
+      <description>Email do usuário para acesso</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.4</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erroleid</name>
+      <description>Código do grupo do usuário previamente cadastrado</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.5</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>errolename</name>
+      <description>Nome do grupo do usuário previamente cadastrado</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.6</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erprofile</name>
+      <description>Perfil de permissionamento</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.7</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erphone</name>
+      <description>Telefone do usuario</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.8</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erworspaceId</name>
+      <description>Codigo do workspace (chave unica)</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.9</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>ertags</name>
+      <description>Tags para uso interno do cliente</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.10</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erpreferredname</name>
+      <description>Nome preferido</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.11</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erClientSecret</name>
+      <description>Client Secret</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.12</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erClientId</name>
+      <description>Client ID</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.13</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>erUrlService</name>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.14</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>ercostcenterid</name>
+      <description>Codigo do centro de custo</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.15</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>ercostcentername</name>
+      <description>Nome do centro de custo</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.16</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <attribute-type single-value="true">
+      <name>ercostcentercompany</name>
+      <description>Nome da empresa definida via interface administracao da VOLL</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.2.17</object-identifier>
+      <syntax>1.3.6.1.4.1.1466.115.121.1.15</syntax>
+    </attribute-type>
+    <!-- ******************************************************** -->
+    <!-- erVollService Class        -->
+    <!-- ******************************************************** -->
+    <class superior="top">
+      <name>erVollService</name>
+      <description>Class representing a RMI service provider for Adapter</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.1.1</object-identifier>
+      <attribute ref="erITDIurl" required="true"/>
+      <attribute ref="erUrlService" required="true"/>
+      <attribute ref="erClientSecret" required="true"/>
+      <attribute ref="erClientId" required="true"/>
+    </class>
+    <!-- ******************************************************** -->
+    <!-- erVollAccount Class         -->
+    <!-- ******************************************************** -->
+    <class superior="top">
+      <name>erVollAccount</name>
+      <description>Voll account</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.1.2</object-identifier>
+      <attribute ref="eruid" required="false"/>
+      <attribute ref="ername" required="false"/>
+      <attribute ref="eraccountStatus" required="false"/>
+      <attribute ref="eremail" required="false"/>
+      <attribute ref="erroleid" required="false"/>
+      <attribute ref="ercostcenterid" required="false"/>
+      <attribute ref="erprofile" required="false"/>
+      <attribute ref="erphone" required="false"/>
+      <attribute ref="erworspaceId" required="false"/>
+      <attribute ref="ertags" required="false"/>
+      <attribute ref="erpreferredname" required="false"/>
+    </class>
+    <!-- ******************************************************** -->
+    <!-- erVollRoles Class         -->
+    <!-- ******************************************************** -->
+    <class superior="top">
+      <name>erVollRoles</name>
+      <description>Supporting data class</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.1.3</object-identifier>
+      <attribute ref="erroleid" required="true"/>
+      <attribute ref="errolename" required="false"/>
+    </class>
+    <!-- ******************************************************** -->
+    <!-- erVollCostCenter Class         -->
+    <!-- ******************************************************** -->
+    <class superior="top">
+      <name>erVollCostCenter</name>
+      <description>Supporting data class</description>
+      <object-identifier>1.3.6.1.4.1.6054.3.44.1.4</object-identifier>
+      <attribute ref="ercostcenterid" required="true"/>
+      <attribute ref="ercostcentername" required="false"/>
+      <attribute ref="ercostcentercompany" required="false"/>
+    </class>
+  </directory-schema>
+</dsml>

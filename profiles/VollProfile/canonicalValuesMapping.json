@@ -1,0 +1,21 @@
+{
+  "erprofile":[
+    {
+      "value": "BASIC",
+      "display": "BASIC"
+    },
+    {
+      "value": "GUEST",
+      "display": "GUEST"
+    },
+    ,
+    {
+      "value": "PASSENGER",
+      "display": "PASSENGER"
+    },
+    {
+      "value": "MANAGER",
+      "display": "MANAGER"
+    }
+  ]
+}

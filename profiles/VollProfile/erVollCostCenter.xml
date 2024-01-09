@@ -1,0 +1,27 @@
+<page>
+	<body>
+		<form action="formvalidator0">
+			<formElement direction="inherit" isReadOnlyOnModify="true" label="$ercostcenterid" name="data.ercostcenterid" required="true">
+				<input name="data.ercostcenterid" size="250" type="text"/>
+				<constraint>
+					<type>REQUIRED</type>
+					<parameter>true</parameter>
+				</constraint>
+			</formElement>
+			<formElement direction="inherit" isReadOnlyOnModify="true" label="$ercostcentername" name="data.ercostcentername" required="false">
+				<input name="data.ercostcentername" size="250" type="text"/>
+				<constraint>
+					<type>REQUIRED</type>
+					<parameter>false</parameter>
+				</constraint>
+			</formElement>
+			<formElement direction="inherit" isReadOnlyOnModify="true" label="$ercostcentercompany" name="data.ercostcentercompany" required="false">
+				<input name="data.ercostcentercompany" size="250" type="text"/>
+				<constraint>
+					<type>REQUIRED</type>
+					<parameter>false</parameter>
+				</constraint>
+			</formElement>
+		</form>
+	</body>
+</page>
